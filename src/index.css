@@ -1,0 +1,85 @@
+.bg-gray {
+  background-color: #f0f2f5;
+}
+
+.fs-0 {
+  font-size: 4rem;
+}
+
+.fs-7 {
+  font-size: 0.8rem;
+}
+
+.dropdown-item:hover {
+  background-color: #d5d5d5
+      /* Or any gray color you prefer */
+}
+
+.nav__btn button:hover {
+  background: #f0f2f5 !important;
+}
+
+.nav__btn button:hover i {
+  color: #0d6efd !important;
+}
+
+.nav__btn-active i {
+  color: #0d6efd !important;
+}
+
+.nav__btn-active {
+  position: relative;
+}
+
+.nav__btn-active:before {
+  content: "";
+  position: absolute;
+  bottom: -4.5px;
+  left: 0;
+  transform: translateY(4.5px);
+  width: 100%;
+  height: 3px;
+  border-bottom: 3px soild #0d6efd !important;
+}
+
+.pointer {
+  cursor: pointer;
+}
+.story:hover {
+  opacity: 0.8;
+}
+
+.post__comment .accordion-button::after {
+  margin-left: 0 !important;
+  display: none !important;
+}
+
+.post__comment .accordion-button:hover {
+  background: transparent !important;
+  border-color: transparent !important;
+}
+
+.post__comment .accordion-button:not(.collapsed) {
+  background: transparent !important;
+}
+
+.post__comment .accordion-button:not(.collapsed) {
+  box-shadow: none !important;
+}
+/* Dark mode */
+
+/* Set text color to white for <p> tags in dark mode */
+[data-bs-theme="dark"] p {
+  color: white;
+}
+
+[data-bs-theme="dark"]i {
+  color: black;
+}
+.dark{
+  background-color: black;
+  color: white;
+}
+[data-bs-theme="dark"] body {
+  color: black;
+}
