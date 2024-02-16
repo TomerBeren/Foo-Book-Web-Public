@@ -22,7 +22,9 @@ const Sidebar = ({theme}) => {
 
     return (
         <div className="col-12 col-lg-3">
-            <div className={`d-none d-xxl-block h-100 fixed-top overflow-hidden scrollbar ${theme === 'dark' ? 'text-white bg-black' : ''}`} style={{ maxWidth: '360px', width: '100%', zIndex: 4 }}>
+            <div className={`d-none d-xxl-block h-100 fixed-top overflow-hidden scrollbar
+            ${theme === 'dark' ? 'text-white bg-black' : ''}`}
+            style={{ maxWidth: '360px', width: '100%', zIndex: 4 }}>
                 <ul className="navbar-nav mt-4 ms-3 d-flex flex-column pb-5 mb-5" style={{ paddingTop: '50px' }}>
                     {sidebarItems.map((item, index) => (
                         <SideBarItem key={index} icon={item.icon} label={item.label} link={item.link} />
