@@ -1,7 +1,8 @@
 import React from 'react';
 import Navbar from './NavBar/NavBar';
+import LogoutButton from './LogoutButton';
 import FloatingActionButton from './FloatingActionButton';
-import MainContent from './MainContent';
+import MainContent from './MainContent/MainContent';
 import { useState,  useEffect } from 'react';
 
 const Feed = () => {
@@ -19,7 +20,10 @@ const Feed = () => {
          <div className={`position relative ${theme === 'dark' ? 'bg-black' : 'bg-gray'}`}>
             <Navbar theme={theme} />
             <MainContent  theme={theme} />
-            <FloatingActionButton onClick={toggleTheme}/>
+            <div className="fixed-bottom p-3" style={{ zIndex: 6, display: 'flex', justifyContent: 'flex-end', alignItems: 'center' }}>
+                <LogoutButton />
+                <FloatingActionButton onClick={toggleTheme}/>
+            </div>
         </div>
     );
 };
