@@ -1,0 +1,17 @@
+/* App.css or ProfilePicture.css */
+.profile-picture-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin-top: 20px;
+    margin-bottom: 10px; /* Adjust spacing as needed */
+  }
+  
+  .profile-picture {
+    width: 100px !important; 
+    height: 100px !important;
+    border-radius: 50% !important;
+    object-fit: cover !important;
+}
+
+  
