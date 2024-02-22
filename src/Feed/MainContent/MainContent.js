@@ -1,7 +1,7 @@
 import React from 'react';
-import SideBar from '../SideBar/SideBar'
-import TimeLine from '../Timeline/TimeLine'
-import ChatBar from '../ChatBar/ChatBar'
+import SideBar from './SideBar/SideBar'
+import TimeLine from './Timeline/TimeLine'
+import ChatBar from './ChatBar/ChatBar'
 const MainContent = ({theme}) => {
     return (
         <div class="container-fluid">
