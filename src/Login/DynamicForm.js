@@ -27,7 +27,7 @@ const DynamicForm = ({ fields, submitLabel, handleSubmit }) => {
       </div>
       <div class="my-5 pb-5 text-center">
         <p class="fw-bold">
-          <a href="#" class="text-decoration-none text-dark">Createa a Page </a>
+          <span class="text-decoration-none text-dark">Createa a Page </span>
           <span class="fw-normal">for a celebrity, band or business.</span>
         </p>
       </div>
