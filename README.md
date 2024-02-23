@@ -1,70 +1,88 @@
-# Getting Started with Create React App
+# FooBook
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+Part 2 of the final project in the advnaced systems programming course.
 
-## Available Scripts
+## Getting Started
 
-In the project directory, you can run:
+Follow these instructions to get a copy of the project up and running on your local machine for development and testing purposes.
 
-### `npm start`
+### Prerequisites
 
-Runs the app in the development mode.\
-Open [http://localhost:3000](http://localhost:3000) to view it in your browser.
+What you need to install the software:
 
-The page will reload when you make changes.\
-You may also see any lint errors in the console.
+```bash
+- Node.js
+- npm
+```
 
-### `npm test`
+### Installing
 
-Launches the test runner in the interactive watch mode.\
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
+Step by step series to get a development environment running:
 
-### `npm run build`
+1. Clone the repo or download the ZIP file
 
-Builds the app for production to the `build` folder.\
-It correctly bundles React in production mode and optimizes the build for the best performance.
+```bash
+git clone https://github.com/TomerBeren/FooBook_Web
+```
 
-The build is minified and the filenames include the hashes.\
-Your app is ready to be deployed!
+Or download and extract the ZIP file from the GitHub repository page.
 
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
+2. Navigate to the project directory
 
-### `npm run eject`
+```bash
+cd path/to/your-project
+```
 
-**Note: this is a one-way operation. Once you `eject`, you can't go back!**
+3. Install dependencies
 
-If you aren't satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
+```bash
+npm install
+```
 
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you're on your own.
+4. Start the development server
 
-You don't have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn't feel obligated to use this feature. However we understand that this tool wouldn't be useful if you couldn't customize it when you are ready for it.
+```bash
+npm start
+```
 
-## Learn More
+The app should now be running on http://localhost:3000.
 
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
+## Running the Tests
 
-To learn React, check out the [React documentation](https://reactjs.org/).
+Describe how to run the automated tests for this system (if applicable):
 
-### Code Splitting
+```bash
+npm test
+```
+If the test didnt run all tests press a.
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/code-splitting](https://facebook.github.io/create-react-app/docs/code-splitting)
 
-### Analyzing the Bundle Size
+## Login
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size](https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size)
+To login use our hardoced credentials:
 
-### Making a Progressive Web App
+Username: Tomer
+Password: a5k8b123
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app](https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app)
+## Registration
 
-### Advanced Configuration
+If you register and then try to register with the same username you will get an error
+becuase we used local session for this step before implementing a hardcoded user.
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/advanced-configuration](https://facebook.github.io/create-react-app/docs/advanced-configuration)
+## Feed
 
-### Deployment
+To add a post just press the What's on your mind button. We allowed a blank post.
+To edit/delete the post press the edit button on the upper right side of the post.
+To comment on a post either press the upside down arrow or press the comment button.
+To add a comment enter some text into the input box and press enter.
+To edit a comment just press edit then change the text and press save.
+To delete a comment press delete.
+To like just press like.
+If you wish to logout press logout button on the lower left side.
+Press the dark mode button on the lower left side to change the theme.
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/deployment](https://facebook.github.io/create-react-app/docs/deployment)
+## Feed Security
 
-### `npm run build` fails to minify
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify](https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify)
+If you try to change the url to /feed it will not work.
+If you login and then press back on the page it will work because you havent loged out.
+Only if you log out it wont work again and the feed page will be secured.
