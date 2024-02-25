@@ -73,7 +73,6 @@ const RegistrationForm = () => {
       return;
     }
 
-    // Registration logic here
     const users = JSON.parse(sessionStorage.getItem('users') || '[]');
     users.push({ ...formData });
     sessionStorage.setItem('users', JSON.stringify(users));

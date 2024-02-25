@@ -2,10 +2,10 @@ import React from 'react';
 
 const ShareOptionsModal = ( ) => {
     return (
-        <ul class="dropdown-menu">
-          <li><span class="dropdown-item" >Instagram</span></li>
-          <li><span class="dropdown-item" >Whatsapp</span></li>
-          <li><span class="dropdown-item" >YouTube</span></li>
+        <ul className="dropdown-menu">
+          <li><span className="dropdown-item" >Instagram</span></li>
+          <li><span className="dropdown-item" >Whatsapp</span></li>
+          <li><span className="dropdown-item" >YouTube</span></li>
         </ul>
     );
 };

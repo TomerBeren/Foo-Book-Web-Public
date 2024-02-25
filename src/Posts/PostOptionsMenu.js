@@ -7,7 +7,7 @@ const PostOptionsMenu = ({onEdit,  onDelete}) => {
 
     return (
         <div className="position-relative">
-            <button className="btn btn-outline-secondary btn-sm" onClick={toggleMenu} aria-expanded={isOpen}>
+            <button className="btn btn-outline-secondary btn-sm" onClick={toggleMenu} aria-expanded={isOpen} aria-label="Options">
                 <i className="fas fa-edit"></i>
             </button>
             {isOpen && (

@@ -25,8 +25,6 @@ const CommentsAccordion = ({ onLikeClick , theme}) => {
     const count = comments.length;
     let commentCount =`${count} Comment${count !== 1 ? 's' : ''}`; 
   
-
-  console.log(onEditComment, onDeleteComment);
   return (
     <div className="accordion" id="accordionExample">
       <div className="accordion-item border-0">

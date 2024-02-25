@@ -51,14 +51,14 @@ describe('RegistrationForm Component', () => {
     test('updates profile picture preview on file upload', async () => {
         render(<RegistrationForm />);
         await act(async () => {
-            // Open the modal before trying to interact with elements inside it
+            // Opening the modal before trying to interact with elements inside it
             await user.click(screen.getByRole('button', { name: /create new account/i }));
         });
-        // Find the file input and simulate a file upload
+        // Finding the file input and simulating a file upload
         const fileInput = document.body.querySelector('input[type="file"]');
         const file = new File(['(⌐□_□)'], 'chucknorris.png', { type: 'image/png' });
 
-        // Use act to wrap asynchronous operations
+        //Act to wrap asynchronous operations
         await act(async () => {
             await user.upload(fileInput, file);
         });

@@ -41,7 +41,6 @@ const CreatePostForm = forwardRef(({ onFormSubmit }, ref) => {
                 onChange={(e) => setPostText(e.target.value)}
             ></textarea>
 
-            {/* Assuming EmojiPicker and UploadButton are controlled components */}
             <EmojiPicker />
             <UploadButton onImageUpload={handleImageUpload} />
         </form>

@@ -20,9 +20,6 @@ export const AuthProvider = ({ children }) => {
     sessionStorage.removeItem('isAuthenticated'); // Clearing the authentication state on logout
   };
 
-  // No need for the useEffect hook to clear the auth state on window unload,
-  // as sessionStorage is automatically cleared when the tab is closed.
-
   return (
     <AuthContext.Provider value={{ isAuthenticated, login, logout }}>
       {children}

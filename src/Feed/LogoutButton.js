@@ -4,10 +4,9 @@ import { useAuth } from '../Authorization/AuthContext'
 const LogoutButton = () => {
     
     const { logout } = useAuth();
-    const navigate = useNavigate(); // Hook to get navigate function
+    const navigate = useNavigate(); 
 
     const handleLogout = () => {
-        // Add your logout logic here (e.g., clearing authentication tokens)
         logout();
         navigate('/login'); // Redirect to login page
     };
