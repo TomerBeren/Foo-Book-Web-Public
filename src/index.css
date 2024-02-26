@@ -6,13 +6,28 @@
   font-size: 4rem;
 }
 
+@media (max-width: 768px) {
+
+  /* Hide Sidebar and Chatbar on smaller screens */
+  .sidebar-container,
+  .chatbar-container {
+    display: none;
+  }
+
+  /* Make Timeline full width on smaller screens */
+  .timeline-container {
+    max-width: 100%;
+    flex: 0 0 100%;
+  }
+}
+
 .fs-7 {
   font-size: 0.8rem;
 }
 
 .dropdown-item:hover {
   background-color: #d5d5d5
-      /* Or any gray color you prefer */
+    /* Or any gray color you prefer */
 }
 
 .nav__btn button:hover {
@@ -45,6 +60,7 @@
 .pointer {
   cursor: pointer;
 }
+
 .story:hover {
   opacity: 0.8;
 }
@@ -66,6 +82,7 @@
 .post__comment .accordion-button:not(.collapsed) {
   box-shadow: none !important;
 }
+
 /* Dark mode */
 
 /* Set text color to white for <p> tags in dark mode */
@@ -76,10 +93,12 @@
 [data-bs-theme="dark"]i {
   color: black;
 }
-.dark{
+
+.dark {
   background-color: black;
   color: white;
 }
+
 [data-bs-theme="dark"] body {
   color: black;
 }

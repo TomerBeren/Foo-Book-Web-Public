@@ -3,7 +3,7 @@ import Likes from "./Likes";
 import CommentsAccordion from "./CommentsAccordion";
  
 const LikesAndComments = ({theme}) => {
-  const [likeCount, setLikeCount] = useState(0); // Initialize like count. Adjust initial count as needed.
+  const [likeCount, setLikeCount] = useState(0); 
  
   const handleLikeClick = () => {
     console.log("like");
