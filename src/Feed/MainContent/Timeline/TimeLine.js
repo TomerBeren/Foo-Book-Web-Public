@@ -42,7 +42,7 @@ const TimeLine = ({theme}) => {
     
 
     return (
-        <div className="col-12 col-lg-6 pb-5">
+        <div className="timeline-container col-12 col-md-6">
             <div className="d-flex flex-column justify-content-center w-100 mx-auto" style={{ paddingTop: '50px', maxWidth: '680px' }}>
                 <Stories theme={theme}/>
                 <CreatePostComponent theme={theme} OnCreatePost={handleAddNewPost} />

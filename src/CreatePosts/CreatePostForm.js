@@ -1,7 +1,7 @@
 import React, { useState, forwardRef, useImperativeHandle } from 'react';
 import Avatar from './Avatar';
-import EmojiPicker from './EmojiPicker'; // Assume this component can insert emojis into text
-import UploadButton from './UploadButton'; // Assume this component handles image uploads and returns a URL
+import EmojiPicker from './EmojiPicker'; 
+import UploadButton from './UploadButton'; 
 import defaultPic from '../defaultpic.png';
 
 const CreatePostForm = forwardRef(({ onFormSubmit }, ref) => {
