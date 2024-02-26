@@ -20,7 +20,6 @@ const Chatbar = ({ theme }) => {
           <SponsoredSection theme={theme} />
           <hr className="m-0" />
           <ContactsHeader />
-          {/* Repeat ContactItem for each friend/contact */}
           {[...Array(10)].map((_, index) => (
             <ContactItem key={index} imageUrl={`https://source.unsplash.com/random/${index + 1}`} name={generateRandomName(index)} />
           ))}

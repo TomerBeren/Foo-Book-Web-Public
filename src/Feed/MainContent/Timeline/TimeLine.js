@@ -26,44 +26,20 @@ const TimeLine = ({theme}) => {
         setEditingPost(postToEdit);
     };
 
-    const handleSave = (postId, newText, newFile) => {
-        // Find the current post to check if newText or newFile actually represents an update
-        const currentPost = posts.find(post => post.id === postId);
-
-        // Check if newText or newFile are provided and different from current
-        const isTextUpdated = newText !== "" && newText !== currentPost.text;
-        const isFileUpdated = newFile != null; // Assuming newFile would be undefined or null if not provided
-
-        // Only proceed with the update if there's new content to replace old
-        if (isTextUpdated || isFileUpdated) {
-            if (isFileUpdated) {
-                // Simulate uploading the file and getting a new URL
-                const newImageUrl = URL.createObjectURL(newFile);
-        
-                // Update the posts state with the new text and new image URL
-                setPosts(prevPosts => prevPosts.map(post => {
-                    if (post.id === postId) {
-                        return { ...post, text: isTextUpdated ? newText : post.text, imageUrl: newImageUrl };
-                    }
-                    return post;
-                }));
-            } else if (isTextUpdated) {
-                // If no new file is selected, but text is updated, just update the text
-                setPosts(prevPosts => prevPosts.map(post => {
-                    if (post.id === postId) {
-                        return { ...post, text: newText };
-                    }
-                    return post;
-                }));
+    const handleSave = (postId, newText, newFile, isPictureRemoved) => {
+        setPosts(prevPosts => prevPosts.map(post => {
+            if (post.id === postId) {
+                // Check for text update
+                const updatedText = newText !== "" ? newText : post.text;
+                // If picture is removed, set imageUrl to null or an empty string, otherwise handle newFile
+                const updatedImageUrl = isPictureRemoved ? null : (newFile ? URL.createObjectURL(newFile) : post.imageUrl);
+                return { ...post, text: updatedText, imageUrl: updatedImageUrl };
             }
-        
-            // Close the modal after updating
-            setEditingPost(null);
-        } else {
-            // If no changes are made, just close the modal without updating the post
-            setEditingPost(null);
-        }
+            return post;
+        }));
+        setEditingPost(null);
     };
+    
 
     return (
         <div className="col-12 col-lg-6 pb-5">
@@ -73,7 +49,7 @@ const TimeLine = ({theme}) => {
                 {posts.map((post) => (
                     <PostHeader
                         theme={theme}
-                        key={post.id} // Assuming each post has a unique ID
+                        key={post.id} 
                         profilePic={post.profilePic}
                         author={post.author}
                         timestamp={post.timestamp}

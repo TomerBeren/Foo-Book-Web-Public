@@ -74,6 +74,7 @@ becuase we used local session for this step before implementing a hardcoded user
 
 - **Adding a Post:** To add a post, click the "What's on your mind" button. Blank posts are permitted.
 - **Editing/Deleting a Post:** To edit or delete a post, click the edit button located in the upper right corner of the post.
+- **Editing functionalities:** Change the text if wanted, change the photo if wanted or remove the current photo of the post. If no photo exists their will be no button to remove it.
 - **Commenting on a Post:** To comment on a post, you can either click the upside-down arrow or the comment button.
 - **Adding a Comment:** To add a comment, type your text into the input box and press enter.
 - **Editing a Comment:** To edit a comment, click the edit button, make your changes, and then click save.

@@ -4,9 +4,7 @@ import Button from 'react-bootstrap/Button';
 import FormField from '../Fields/FormField';
 
 const RegistrationModal = ({ show, onHide, fields, handleSubmit, submitLabel, errors, profile }) => {
-    // Directly call handleSubmit on the button click, no need for formRef or submitForm
    
-
     // Map fields to FormField components
     const renderedFields = fields.map((field, index) => (
         <FormField
@@ -29,7 +27,6 @@ const RegistrationModal = ({ show, onHide, fields, handleSubmit, submitLabel, er
                     {/* Modal Footer within the form for proper submission handling */}
                     <Modal.Footer>
                         <Button variant="secondary" onClick={onHide}>Close</Button>
-                        {/* Submit button now of type 'submit', triggers form's onSubmit */}
                         <Button variant="success" type="submit">{submitLabel}</Button>
                     </Modal.Footer>
                 </form>
