@@ -30,7 +30,7 @@ const LoginForm = () => {
     };
 
     // Validate all fields on form submission
-    const handleLoginSubmit = (e) => {
+    const handleLoginSubmit = async (e) => {
         e.preventDefault();
 
         let isValid = true;
@@ -50,13 +50,29 @@ const LoginForm = () => {
             return;
         }
 
+        // Encode form data
+        const encodedFormData = new URLSearchParams();
+        Object.keys(formData).forEach(key => {
+            encodedFormData.append(key, formData[key]);
+        });
+
+        const result = await fetch('http://localhost:8080/login', {
+            method: 'post',
+            headers: {
+                'Content-Type': 'application/x-www-form-urlencoded',
+            },
+            body: encodedFormData.toString()
+        })
+
+        const data = await result.json();
         // Proceed with login if validation passes
-        if (formData.username === 'Tomer' && formData.password === 'a5k8b123') {
+        if (data.result == 'Success') {
+            alert('Successful Login');
             login();
             navigate('/feed');
         } else {
             setErrors(prevErrors => ({ ...prevErrors, form: "Invalid username or password" }));
-            alert("Invalid username or password.");
+            alert(data.reason);
         }
     };
 
