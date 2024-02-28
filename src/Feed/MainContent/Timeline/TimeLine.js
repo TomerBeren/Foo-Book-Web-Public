@@ -10,7 +10,25 @@ const TimeLine = ({theme}) => {
     const [editingPost, setEditingPost] = useState(null);
 
     useEffect(() => {
-        setPosts(postsData);
+        // Define the function that fetches data from the server
+        const fetchPosts = async () => {
+            try {
+                // Make an HTTP GET request to the backend server
+                const response = await fetch('http://localhost:8080/posts');
+                if (!response.ok) {
+                    throw new Error(`HTTP error! status: ${response.status}`);
+                }
+                // Parse the JSON response
+                const data = await response.json();
+                // Set the posts in state
+                setPosts(data.posts);
+            } catch (error) {
+                console.error('Fetching posts failed:', error);
+            }
+        };
+    
+        // Call the function
+        fetchPosts();
     }, []);
 
     const handleAddNewPost = (newPost) => {

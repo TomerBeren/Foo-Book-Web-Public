@@ -53,8 +53,9 @@ const RegistrationForm = () => {
     setErrors(prev => ({ ...prev, [name]: error }));
   };
 
-  const handleRegisterSubmit = (e) => {
+  const handleRegisterSubmit = async (e) => {
     e.preventDefault();
+    console.log('Form data before submission:', formData);
     let isValid = true;
 
     // Re-validate all fields
@@ -73,12 +74,39 @@ const RegistrationForm = () => {
       return;
     }
 
-    const users = JSON.parse(sessionStorage.getItem('users') || '[]');
-    users.push({ ...formData });
-    sessionStorage.setItem('users', JSON.stringify(users));
-    alert('Registration successful!');
-    setShowModal(false);
-    resetForm();
+    try {
+      // Here, we assume that your server has a route '/register' to handle user registration
+      const response = await fetch('http://localhost:8080/register', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({
+          username: formData.username,
+          password: formData.password, // Ensure password is encrypted/hashed before sending
+          displayname: formData.displayname,
+          profilepic: formData.profilepic // This will be just a reference or path to the image
+        }),
+      });
+  
+      const data = await response.json();
+  
+      if (response.ok) {
+        console.log('Registration successful:', data);
+        alert('Registration successful!');
+        setShowModal(false);
+        resetForm();
+      } else {
+        // Handle errors from the server
+        console.error('Registration error:', data);
+        setErrors(data.errors);
+      }
+    } catch (error) {
+      // Handle network or server error
+      console.error('There was an error!', error);
+    }
+    
+    
   };
 
   const resetForm = () => {

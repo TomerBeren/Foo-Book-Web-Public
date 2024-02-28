@@ -13,9 +13,9 @@ const Chatbar = ({ theme }) => {
   }
 
   return (
-    <div className="chatbar-container col-md-3 d-none d-md-block">
-      <div className={`h-100 overflow-hidden scrollbar ${theme === 'dark' ? 'text-white bg-black' : ''}`}
-        style={{ maxWidth: "360px", width: "100%", zIndex: 4, paddingTop: "50px", left: "initial" }}>
+    <div className="chatbar-container col-md-3 d-none d-md-block" style={{ position: 'relative' }}>
+      <div className={`d-flex h-100 overflow-hidden scrollbar ${theme === 'dark' ? 'text-white bg-black' : ''}`}
+        style={{ maxWidth: "360px", width: "100%", zIndex: 4, paddingTop: "50px", position: 'absolute', right: 0 }}>
         <div className="p-3 mt-4">
           <SponsoredSection theme={theme} />
           <hr className="m-0" />
