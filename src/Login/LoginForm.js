@@ -56,7 +56,7 @@ const LoginForm = () => {
             encodedFormData.append(key, formData[key]);
         });
 
-        const result = await fetch('http://localhost:8080/login', {
+        const loginResponse = await fetch('http://localhost:8080/api/tokens', {
             method: 'post',
             headers: {
                 'Content-Type': 'application/x-www-form-urlencoded',
@@ -64,15 +64,33 @@ const LoginForm = () => {
             body: encodedFormData.toString()
         })
 
-        const data = await result.json();
-        // Proceed with login if validation passes
-        if (data.result == 'Success') {
+        const loginData = await loginResponse.json();
+
+        if (loginData.result == 'Success' && loginData.token) {
+
+            // Fetch user details using the JWT
+            const userDetailsResponse = await fetch(`http://localhost:8080/api/users/${loginData.userId}`, {
+                method: 'GET',
+                headers: {
+                    'Authorization': `Bearer ${loginData.token}`,
+                },
+            });
+
+            if (!userDetailsResponse.ok) {
+                throw new Error('Failed to fetch user details');
+            }
+            else{
+                console.log(userDetailsResponse)
+            }
+
             alert('Successful Login');
             login();
             navigate('/feed');
-        } else {
+
+        }
+        else {
             setErrors(prevErrors => ({ ...prevErrors, form: "Invalid username or password" }));
-            alert(data.reason);
+            alert(loginData.reason);
         }
     };
 
