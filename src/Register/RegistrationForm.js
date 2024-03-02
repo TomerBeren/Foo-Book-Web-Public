@@ -76,16 +76,16 @@ const RegistrationForm = () => {
 
     try {
       // Here, we assume that your server has a route '/register' to handle user registration
-      const response = await fetch('http://localhost:8080/register', {
+      const response = await fetch('http://localhost:8080/api/users', {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
         },
         body: JSON.stringify({
           username: formData.username,
-          password: formData.password, // Ensure password is encrypted/hashed before sending
+          password: formData.password, 
           displayname: formData.displayname,
-          profilepic: formData.profilepic // This will be just a reference or path to the image
+          profilepic: formData.profilepic 
         }),
       });
   
