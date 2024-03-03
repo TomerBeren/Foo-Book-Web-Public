@@ -5,10 +5,14 @@ const UploadButton = ({ onImageUpload }) => {
   const handleFileChange = (event) => {
     const file = event.target.files[0];
     if (file) {
-      const fileUrl = URL.createObjectURL(file);
-      onImageUpload(fileUrl);
+      const reader = new FileReader();
+      reader.onloadend = () => {
+        onImageUpload(reader.result);
+      };
+      reader.readAsDataURL(file);
     }
   };
+  
 
   return (
     <div>

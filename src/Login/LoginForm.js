@@ -68,6 +68,9 @@ const LoginForm = () => {
 
         if (loginData.result == 'Success' && loginData.token) {
 
+            localStorage.setItem('userId', loginData.userId);
+            localStorage.setItem('token', loginData.token);
+
             // Fetch user details using the JWT
             const userDetailsResponse = await fetch(`http://localhost:8080/api/users/${loginData.userId}`, {
                 method: 'GET',
