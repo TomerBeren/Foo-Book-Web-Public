@@ -21,7 +21,7 @@ const RegistrationForm = () => {
     if (!value.trim()) {
       return `${name.charAt(0).toUpperCase() + name.slice(1)} is required.`; // Capitalize field name for the message
     }
-    
+
     switch (name) {
       case 'username':
         const users = JSON.parse(sessionStorage.getItem('users') || '[]');
@@ -44,7 +44,7 @@ const RegistrationForm = () => {
     }
     return '';
   };
-  
+
 
   const handleInputChange = (e) => {
     const { name, value } = e.target;
@@ -74,6 +74,13 @@ const RegistrationForm = () => {
       return;
     }
 
+    const submissionData = {
+      ...formData,
+      profilePic: profilePicPreview,
+    };
+
+    delete submissionData.profilepic;
+
     try {
       // Here, we assume that your server has a route '/register' to handle user registration
       const response = await fetch('http://localhost:8080/api/users', {
@@ -81,16 +88,11 @@ const RegistrationForm = () => {
         headers: {
           'Content-Type': 'application/json',
         },
-        body: JSON.stringify({
-          username: formData.username,
-          password: formData.password, 
-          displayname: formData.displayname,
-          profilepic: formData.profilepic 
-        }),
+        body: JSON.stringify(submissionData),
       });
-  
+
       const data = await response.json();
-  
+
       if (response.ok) {
         console.log('Registration successful:', data);
         alert('Registration successful!');
@@ -105,8 +107,8 @@ const RegistrationForm = () => {
       // Handle network or server error
       console.error('There was an error!', error);
     }
-    
-    
+
+
   };
 
   const resetForm = () => {

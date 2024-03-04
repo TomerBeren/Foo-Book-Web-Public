@@ -2,37 +2,64 @@ import React, { useState, useEffect } from 'react';
 import Stories from './Stories';
 import CreatePostComponent from '../../../CreatePosts/CreatePostComponent';
 import PostHeader from '../../../Posts/PostHeader';
-import postsData from '../../../PostData.json';
 import EditPostModal from './EditPostModal';
 
-const TimeLine = ({theme}) => {
+const TimeLine = ({ theme }) => {
+    const [userId, setUserId] = useState(localStorage.getItem('userId'))
+    const [token,setToken] = useState(localStorage.getItem('token'));
     const [posts, setPosts] = useState([]);
     const [editingPost, setEditingPost] = useState(null);
 
     useEffect(() => {
-        // Define the function that fetches data from the server
         const fetchPosts = async () => {
             try {
-                // Make an HTTP GET request to the backend server
-                const response = await fetch('http://localhost:8080/posts');
+                const response = await fetch(`http://localhost:8080/api/users/${userId}/posts`, {
+                    method: 'GET', // Specify the method explicitly
+                    headers: {
+                        'Content-Type': 'application/json',
+                        'Authorization': `Bearer ${token}`, 
+                    },
+                });
                 if (!response.ok) {
                     throw new Error(`HTTP error! status: ${response.status}`);
                 }
-                // Parse the JSON response
                 const data = await response.json();
-                // Set the posts in state
-                setPosts(data.posts);
+                setPosts(Array.isArray(data) ? data : []);
+                console.log(posts)
             } catch (error) {
                 console.error('Fetching posts failed:', error);
             }
         };
-    
-        // Call the function
         fetchPosts();
     }, []);
 
-    const handleAddNewPost = (newPost) => {
-        setPosts(prevPosts => [newPost, ...prevPosts]);
+    const handleAddNewPost = async (newPost) => {
+
+        if (userId === "" || token === "") {
+            console.error('User ID or token is missing');
+            return;
+        }
+
+        try {
+            const response = await fetch(`http://localhost:8080/api/users/${userId}/posts`, {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json',
+                    'Authorization': `Bearer ${token}`, // Assuming Bearer token authentication
+                },
+                body: JSON.stringify(newPost),
+            });
+
+            if (!response.ok) {
+                throw new Error('Failed to create new post');
+            }
+
+            const createdPost = await response.json();
+            // Optionally update local state or UI based on response
+            setPosts(prevPosts => [createdPost, ...prevPosts]);
+        } catch (error) {
+            console.error('Error creating new post:', error);
+        }
     };
 
     const handleDeletePost = (postId) => {
@@ -57,17 +84,17 @@ const TimeLine = ({theme}) => {
         }));
         setEditingPost(null);
     };
-    
+
 
     return (
         <div className="timeline-container col-12 col-md-6">
             <div className="d-flex flex-column justify-content-center w-100 mx-auto" style={{ paddingTop: '50px', maxWidth: '680px' }}>
-                <Stories theme={theme}/>
+                <Stories theme={theme} />
                 <CreatePostComponent theme={theme} OnCreatePost={handleAddNewPost} />
                 {posts.map((post) => (
                     <PostHeader
                         theme={theme}
-                        key={post.id} 
+                        key={post.id}
                         profilePic={post.profilePic}
                         author={post.author}
                         timestamp={post.timestamp}
