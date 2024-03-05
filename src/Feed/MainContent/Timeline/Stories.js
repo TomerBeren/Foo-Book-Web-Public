@@ -2,17 +2,20 @@
 import React from 'react';
 import Story from './Story';
 import defaultPic from '../../../defaultpic.png'
-
-const storiesData = [
-    { image: defaultPic, label: 'Create Story', isMain: true },
-    { image: 'https://source.unsplash.com/random/18', label: 'Story 2' },
-    { image: 'https://source.unsplash.com/random/19', label: 'Story 3' },
-    { image: 'https://source.unsplash.com/random/20', label: 'Story 4' },
-    { image: 'https://source.unsplash.com/random/21', label: 'Story 5' },
-    { image: 'https://source.unsplash.com/random/22', label: 'Story 6' },
-];
+import { useUser } from '../../../UserContext';
 
 const Stories = ({ theme }) => {
+    const { userDetails, setUserDetails } = useUser();
+
+    const storiesData = [
+        { image: userDetails.profilePic, label: 'Create Story', isMain: true },
+        { image: 'https://source.unsplash.com/random/18', label: 'Story 2' },
+        { image: 'https://source.unsplash.com/random/19', label: 'Story 3' },
+        { image: 'https://source.unsplash.com/random/20', label: 'Story 4' },
+        { image: 'https://source.unsplash.com/random/21', label: 'Story 5' },
+        { image: 'https://source.unsplash.com/random/22', label: 'Story 6' },
+    ];
+    
     return (
         <div className="d-flex justify-content-between position-relative mt-5">
             {storiesData.map((story, index) => (

@@ -8,10 +8,13 @@ import groupPic from '../../../Photos/groups.png'
 import facebookPic from '../../../Photos/facebook.png'
 import SeeMoreButton from './SeeMoreButton';
 import MemoryItem from './MemoryItem';
+import { useUser } from '../../../UserContext';
 
 const Sidebar = ({theme}) => {
+    const { userDetails, setUserDetails } = useUser();
+
     const sidebarItems = [
-        { icon: defaultPic, label: 'Tomer', link: '#' },
+        { icon: userDetails.profilePic, label: userDetails.displayName, link: '#' },
         { icon: freindPic, label: 'Friends', link: '#' },
         { icon: memoryPic, label: 'Memories', link: '#' },
         { icon: savedPic, label: 'Saved', link: '#' },
