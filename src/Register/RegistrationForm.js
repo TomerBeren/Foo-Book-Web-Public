@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useCallback } from 'react';
 import RegistrationModal from './RegistrationModal';
 import { registrationFields } from '../Fields/FieldsConfig';
 import ProfilePicture from './ProfilePic';
@@ -15,8 +15,28 @@ const RegistrationForm = () => {
   const [errors, setErrors] = useState({});
   const [profilePicPreview, setProfilePicPreview] = useState(defaultpic);
   const [showModal, setShowModal] = useState(false);
+  const [usernameValidation, setUsernameValidation] = useState({
+    isValid: true,
+  });
 
-  // Validation checks
+  const checkUsernameAvailability = async (username) => {
+    try {
+      const response = await fetch(`http://localhost:8080/api/users/check-username?username=${username}`, {
+        method: 'GET'
+      });
+      const data = await response.json();
+      if (!response.ok) throw new Error(data.message || 'Error checking username');
+      setUsernameValidation({ isValid: data.available }); // Update based on availability
+      if (data.available === false) {
+        setErrors(prevErrors => ({ ...prevErrors, username: 'Username is already taken.' }));
+      } else {
+        setErrors(prevErrors => ({ ...prevErrors, username: '' }));
+      }
+    } catch (error) {
+      console.error('Error checking username availability:', error);
+    }
+  };
+
   const validateField = (name, value) => {
     if (!value.trim()) {
       return `${name.charAt(0).toUpperCase() + name.slice(1)} is required.`; // Capitalize field name for the message
@@ -24,9 +44,8 @@ const RegistrationForm = () => {
 
     switch (name) {
       case 'username':
-        const users = JSON.parse(sessionStorage.getItem('users') || '[]');
-        if (users.find(user => user.username === value)) {
-          return 'Username is already taken.';
+        if (!usernameValidation.isValid) {
+          return 'Username is already taken.'
         }
         break;
       case 'password':
@@ -45,30 +64,31 @@ const RegistrationForm = () => {
     return '';
   };
 
-
   const handleInputChange = (e) => {
     const { name, value } = e.target;
     const error = validateField(name, value);
     setFormData(prev => ({ ...prev, [name]: value }));
     setErrors(prev => ({ ...prev, [name]: error }));
+    if (name === 'username' && value != '') {
+      checkUsernameAvailability(value);
+    }
   };
 
   const handleRegisterSubmit = async (e) => {
     e.preventDefault();
-    console.log('Form data before submission:', formData);
-    let isValid = true;
 
-    // Re-validate all fields
-    const validationErrors = {};
+    let validationErrors = {};
+    let isFormValid = true;
+
     Object.keys(formData).forEach(key => {
       const error = validateField(key, formData[key]);
       if (error) {
         validationErrors[key] = error;
-        isValid = false;
+        isFormValid = false;
       }
     });
 
-    if (!isValid) {
+    if (!isFormValid) {
       setErrors(validationErrors);
       alert("Please correct the errors before submitting.");
       return;
@@ -79,10 +99,9 @@ const RegistrationForm = () => {
       profilePic: profilePicPreview,
     };
 
+    delete submissionData.confirmpassword; // Assuming you don't want to send this to the server
     delete submissionData.profilepic;
-
     try {
-      // Here, we assume that your server has a route '/register' to handle user registration
       const response = await fetch('http://localhost:8080/api/users', {
         method: 'POST',
         headers: {
@@ -99,16 +118,19 @@ const RegistrationForm = () => {
         setShowModal(false);
         resetForm();
       } else {
-        // Handle errors from the server
         console.error('Registration error:', data);
-        setErrors(data.errors);
+        // Update errors state based on the response, maintaining other errors
+        setErrors(prevErrors => ({
+          ...prevErrors,
+          ...validationErrors,
+          ...(data.errors || {}),
+          ...(response.status === 400 && data.message === 'Username already taken' ? { username: 'Username is already taken.' } : {})
+        }));
       }
     } catch (error) {
-      // Handle network or server error
       console.error('There was an error!', error);
+      alert('An error occurred. Please try again.');
     }
-
-
   };
 
   const resetForm = () => {
@@ -135,14 +157,6 @@ const RegistrationForm = () => {
     }
   };
 
-  const fields = registrationFields.map(field => ({
-    ...field,
-    value: formData[field.name],
-    onChange: field.type === 'file' ? handleProfilePicChange : handleInputChange,
-    className: errors[field.name] ? 'is-invalid' : formData[field.name] ? 'is-valid' : '',
-    errorMessage: errors[field.name],
-  }));
-
   const handleShowModal = () => setShowModal(true);
 
   const onHideModal = () => {
@@ -160,7 +174,13 @@ const RegistrationForm = () => {
       <RegistrationModal
         show={showModal}
         onHide={onHideModal}
-        fields={fields}
+        fields={registrationFields.map(field => ({
+          ...field,
+          value: formData[field.name],
+          onChange: field.type === 'file' ? handleProfilePicChange : handleInputChange,
+          className: errors[field.name] ? 'is-invalid' : formData[field.name] ? 'is-valid' : '',
+          errorMessage: errors[field.name],
+        }))}
         handleSubmit={handleRegisterSubmit}
         submitLabel="Sign Up"
         errors={errors}

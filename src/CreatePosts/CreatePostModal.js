@@ -19,10 +19,6 @@ const CreatePostModal = ({ isOpen, onRequestClose, onCreatePost }) => {
                 <CreatePostForm ref={formRef} onFormSubmit={(formData) => {
                     const newPost = {
                         ...formData,
-                        author: "Tomer",
-                        id: new Date().getTime(),
-                        profilePic: defaultPic,
-                        timestamp: new Date().toLocaleString(),
                     };
                     onCreatePost(newPost);
                     onRequestClose();

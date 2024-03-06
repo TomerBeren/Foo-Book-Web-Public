@@ -6,7 +6,7 @@ const Story = ({ image, label, isMain , theme }) => {
     <div className={`mx-1 rounded story ${theme === 'dark' ? 'text-white bg-dark' : 'bg-white'}`} style={{ width: '6em', height: '190px' }} type="button">
       {isMain ? (
         <>
-          <img src={image} alt={label} className="card-img-top" style={{ minHeight: '125px', objectFit: 'cover' }} />
+          <img src={image} alt={label} className="card-img-top rounded" style={{ minHeight: '125px', objectFit: 'cover' }} />
           <div className="d-flex align-items-center justify-content-center position-relative" style={{ minHeight: '65px' }}>
             <p className="mb-0 text-center fs-7 fw-bold">{label}</p>
             <div className="position-absolute top-0 start-50 translate-middle">

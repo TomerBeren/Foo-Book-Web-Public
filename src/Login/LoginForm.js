@@ -1,9 +1,9 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import DynamicForm from './DynamicForm';
 import { loginFields } from '../Fields/FieldsConfig';
 import { useNavigate } from 'react-router-dom';
 import { useAuth } from '../Authorization/AuthContext';
-
+import { useUser } from '../UserContext';
 const LoginForm = () => {
     const { login } = useAuth();
     const [formData, setFormData] = useState({
@@ -11,8 +11,13 @@ const LoginForm = () => {
         password: '',
     });
     const [errors, setErrors] = useState({});
+    const { userDetails, setUserDetails } = useUser();
     const navigate = useNavigate();
 
+    useEffect(() => {
+        console.log(userDetails); // This logs whenever userDetails updates
+    }, [userDetails]);
+    
     // Validation function
     const validateField = (name, value) => {
         if (!value.trim()) {
@@ -82,9 +87,15 @@ const LoginForm = () => {
             if (!userDetailsResponse.ok) {
                 throw new Error('Failed to fetch user details');
             }
-            else{
-                console.log(userDetailsResponse)
-            }
+
+            const userDetailsJson = await userDetailsResponse.json(); // Convert response to JSON
+            console.log("Fetched User Details:", userDetailsJson);
+            
+            setUserDetails({
+                displayName: userDetailsJson.displayName,
+                profilePic: userDetailsJson.profilePic,
+                friendsList: userDetailsJson.friendsList, // Adjust these keys based on your actual user details structure
+            });
 
             alert('Successful Login');
             login();
