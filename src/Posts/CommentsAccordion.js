@@ -3,7 +3,7 @@ import CommentsToggle from './CommentsToggle';
 import LikeAndCommentBar from './LikeAndCommentBar';
 import NewCommentForm from './NewCommentForm';
 
-const CommentsAccordion = ({ onLikeClick , theme}) => {
+const CommentsAccordion = ({ onLikeClick , theme, action}) => {
   const [isOpen, setIsOpen] = useState(false);
   const [comments, setComments] = useState([]); // Initialize comments as an empty array
 
@@ -30,7 +30,7 @@ const CommentsAccordion = ({ onLikeClick , theme}) => {
       <div className="accordion-item border-0">
         <CommentsToggle isOpen={isOpen} onClick={toggleComments} commentCount={commentCount}/>
         <hr />
-        <LikeAndCommentBar onLikeClick={onLikeClick} onCommentClick={toggleComments} />
+        <LikeAndCommentBar onLikeClick={onLikeClick} onCommentClick={toggleComments} action={action} />
         {isOpen && (
           <div id="collapsePost1" className="accordion-collapse collapse show">
             <NewCommentForm theme={theme} onCommentSubmit={addComment} comments={comments} onEditComment={onEditComment} onDeleteComment={onDeleteComment} />
