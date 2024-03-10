@@ -152,7 +152,7 @@ const Chatbar = ({ theme }) => {
               name={friendRequest.displayname}
               onRight={() => acceptFriendRequest(friendRequest._id)}
               onLeft={() => deleteFriend(friendRequest._id)}
-              leftButtonLabel="Delete"
+              leftButtonLabel="Decline"
               rightButtonLabel="Accept" />
           ))}
           <hr className="m-0" />

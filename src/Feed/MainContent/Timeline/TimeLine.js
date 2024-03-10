@@ -98,7 +98,10 @@ const TimeLine = ({ theme }) => {
 
     const handleEdit = (postId) => {
         const postToEdit = posts.find(p => p._id === postId);
-        console.log("Editing post ID:", postId);
+        if (userId !== postToEdit.createdBy._id) {
+            alert("User not authorized to update this post, or post not found.");
+            return;
+        }
         setEditingPost(postToEdit);
     };
 
