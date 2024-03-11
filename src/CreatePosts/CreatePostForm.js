@@ -2,11 +2,10 @@ import React, { useState, forwardRef, useImperativeHandle } from 'react';
 import Avatar from './Avatar';
 import EmojiPicker from './EmojiPicker'; 
 import UploadButton from './UploadButton'; 
-import defaultPic from '../defaultpic.png';
 import { useUser } from '../UserContext';
 
 const CreatePostForm = forwardRef(({ onFormSubmit }, ref) => {
-    const { userDetails, setUserDetails } = useUser();
+    const { userDetails} = useUser();
     const [postText, setPostText] = useState('');
     const [imageUrl, setImageUrl] = useState('');
 

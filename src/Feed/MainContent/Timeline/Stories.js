@@ -1,11 +1,10 @@
 // Stories.js
 import React from 'react';
 import Story from './Story';
-import defaultPic from '../../../defaultpic.png'
 import { useUser } from '../../../UserContext';
 
 const Stories = ({ theme }) => {
-    const { userDetails, setUserDetails } = useUser();
+    const { userDetails } = useUser();
 
     const storiesData = [
         { image: userDetails.profilePic, label: 'Create Story', isMain: true },
@@ -15,7 +14,7 @@ const Stories = ({ theme }) => {
         { image: 'https://source.unsplash.com/random/21', label: 'Story 5' },
         { image: 'https://source.unsplash.com/random/22', label: 'Story 6' },
     ];
-    
+
     return (
         <div className="d-flex justify-content-between position-relative mt-5">
             {storiesData.map((story, index) => (

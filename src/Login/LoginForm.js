@@ -71,7 +71,7 @@ const LoginForm = () => {
 
         const loginData = await loginResponse.json();
 
-        if (loginData.result == 'Success' && loginData.token) {
+        if (loginData.result === 'Success' && loginData.token) {
 
             localStorage.setItem('userId', loginData.userId);
             localStorage.setItem('token', loginData.token);

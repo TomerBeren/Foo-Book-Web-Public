@@ -2,12 +2,11 @@ import React, { useState } from 'react';
 import CreatePostModal from './CreatePostModal';
 import ActionButton from './ActionButton';
 import Avatar from './Avatar';
-import defualtPic from '../defaultpic.png'
 import '../index.css'
 import { useUser } from '../UserContext';
 
 const CreatePostComponent = ({OnCreatePost ,theme}) => {
-  const { userDetails, setUserDetails } = useUser();
+  const { userDetails} = useUser();
 
   const [modalIsOpen, setModalIsOpen] = useState(false);
 
