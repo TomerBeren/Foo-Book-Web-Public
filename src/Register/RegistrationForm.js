@@ -1,4 +1,4 @@
-import React, { useState, useCallback } from 'react';
+import React, { useState } from 'react';
 import RegistrationModal from './RegistrationModal';
 import { registrationFields } from '../Fields/FieldsConfig';
 import ProfilePicture from './ProfilePic';
@@ -69,7 +69,7 @@ const RegistrationForm = () => {
     const error = validateField(name, value);
     setFormData(prev => ({ ...prev, [name]: value }));
     setErrors(prev => ({ ...prev, [name]: error }));
-    if (name === 'username' && value != '') {
+    if (name === 'username' && value !== '') {
       checkUsernameAvailability(value);
     }
   };

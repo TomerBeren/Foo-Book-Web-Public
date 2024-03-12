@@ -1,7 +1,7 @@
 import React, { useRef } from 'react';
 import { Modal, Button } from 'react-bootstrap';
 import CreatePostForm from './CreatePostForm';
-import defaultPic from '../defaultpic.png'
+
 const CreatePostModal = ({ isOpen, onRequestClose, onCreatePost }) => {
     const formRef = useRef();
 

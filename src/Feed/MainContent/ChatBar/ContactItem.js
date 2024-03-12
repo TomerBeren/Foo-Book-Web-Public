@@ -13,7 +13,7 @@ const ContactItem = ({ imageUrl, name, onRight, onLeft, leftButtonLabel, rightBu
               <span className="visually-hidden"></span>
             </span>
           </div>
-          <p className="m-0">{name}</p>
+          <p className="m-0 me-2">{name}</p>
         </div>
         <div>
           {onLeft && (

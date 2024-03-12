@@ -1,10 +1,9 @@
 import React, { useState } from 'react';
 import Avatar from '../CreatePosts/Avatar';
-import defaultPic from '../defaultpic.png';
 import { useUser } from '../UserContext';
 
 const NewCommentForm = ({ onCommentSubmit, comments, onEditComment, onDeleteComment, theme }) => {
-    const { userDetails, setUserDetails } = useUser();
+    const { userDetails } = useUser();
     const [commentText, setCommentText] = useState('');
     const [isEditing, setIsEditing] = useState(null);
     const [editText, setEditText] = useState('');
@@ -33,7 +32,7 @@ const NewCommentForm = ({ onCommentSubmit, comments, onEditComment, onDeleteComm
             {comments.map(({ id, text }) => (
                 <div key={id} className="comments-list d-flex flex-row align-items-center my-1 ">
                     <div className="mt-3">
-                    <Avatar src={userDetails.profilePic} alt="profilePic" />
+                        <Avatar src={userDetails.profilePic} alt="profilePic" />
                     </div>
                     <div className="p-2 rounded w-100">
                         {isEditing === id ? (

@@ -1,6 +1,5 @@
 import React from 'react';
 import SideBarItem from './SideBarItem';
-import defaultPic from '../../../defaultpic.png'
 import freindPic from '../../../Photos/friend.png'
 import memoryPic from '../../../Photos/memories.png'
 import savedPic from '../../../Photos/saved.png'
@@ -11,7 +10,7 @@ import MemoryItem from './MemoryItem';
 import { useUser } from '../../../UserContext';
 
 const Sidebar = ({theme}) => {
-    const { userDetails, setUserDetails } = useUser();
+    const { userDetails} = useUser();
 
     const sidebarItems = [
         { icon: userDetails.profilePic, label: userDetails.displayName, link: '#' },
@@ -39,7 +38,7 @@ const Sidebar = ({theme}) => {
                     <MemoryItem src="https://source.unsplash.com/random/14" label="Archive" />
                     <MemoryItem src="https://source.unsplash.com/random/15" label="Activities" />
                     <MemoryItem src="https://source.unsplash.com/random/16" label="Games" />
-                    <MemoryItem src="https://source.unsplash.com/random/17" label="Favourits" />
+                    <MemoryItem src="https://source.unsplash.com/random/17" label="Favourites" />
                     <MemoryItem src="https://source.unsplash.com/random/18" label="Stories" />
                 </ul>
 
