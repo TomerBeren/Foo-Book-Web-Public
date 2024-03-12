@@ -14,10 +14,6 @@ const LoginForm = () => {
     const { userDetails, setUserDetails } = useUser();
     const navigate = useNavigate();
 
-    useEffect(() => {
-        console.log(userDetails); // This logs whenever userDetails updates
-    }, [userDetails]);
-    
     // Validation function
     const validateField = (name, value) => {
         if (!value.trim()) {
@@ -90,7 +86,7 @@ const LoginForm = () => {
 
             const userDetailsJson = await userDetailsResponse.json(); // Convert response to JSON
             console.log("Fetched User Details:", userDetailsJson);
-            
+
             setUserDetails({
                 displayName: userDetailsJson.displayName,
                 profilePic: userDetailsJson.profilePic,
