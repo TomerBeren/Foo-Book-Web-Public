@@ -21,7 +21,7 @@ const TimeLine = ({ theme }) => {
         const fetchPosts = async () => {
             try {
                 const response = await fetch(`http://localhost:8080/api/posts`, {
-                    method: 'GET', // Specify the method explicitly
+                    method: 'GET', 
                     headers: {
                         'Content-Type': 'application/json',
                         'Authorization': `Bearer ${token}`,
@@ -31,8 +31,6 @@ const TimeLine = ({ theme }) => {
                     throw new Error(`HTTP error! status: ${response.status}`);
                 }
                 const data = await response.json();
-                console.log(data);
-                // Assuming the response is an object with friendsPosts and nonFriendsPosts
                 const combinedPosts = [...data.friendsPosts, ...data.nonFriendsPosts];
                 setAllPosts(combinedPosts);
                 setPosts(combinedPosts);
@@ -82,14 +80,13 @@ const TimeLine = ({ theme }) => {
                 },
             });
 
-            const data = await response.json(); // Assuming the server always sends back a JSON response
+            const data = await response.json(); 
 
             if (!response.ok) {
                 throw new Error(data.message || 'An error occurred while trying to delete the post');
             }
             setPosts(prevPosts => prevPosts.filter(post => post._id !== postId));
             alert(data.message); // Alert success message
-            // Additional logic to update UI accordingly
         } catch (error) {
             console.error('Error deleting post:', error);
             alert(error.message); // Alert the error message from the catch block
@@ -98,7 +95,7 @@ const TimeLine = ({ theme }) => {
 
     const handleEdit = (postId) => {
         const postToEdit = posts.find(p => p._id === postId);
-        if (userId !== postToEdit.createdBy._id) {
+        if (!postToEdit.canEdit) {
             alert("User not authorized to update this post, or post not found.");
             return;
         }
@@ -130,7 +127,7 @@ const TimeLine = ({ theme }) => {
 
         try {
             const response = await fetch(`http://localhost:8080/api/users/${userId}/posts/${postId}`, {
-                method: 'PATCH', // or 'PUT', depending on your backend requirements
+                method: 'PATCH', 
                 headers: {
                     'Content-Type': 'application/json',
                     'Authorization': `Bearer ${token}`,
@@ -139,7 +136,6 @@ const TimeLine = ({ theme }) => {
             });
 
             if (!response.ok) {
-                // Attempt to parse error message from response body
                 const errorData = await response.json();
                 throw new Error(errorData.message || 'Failed to update post');
             }
@@ -173,7 +169,6 @@ const TimeLine = ({ theme }) => {
                     alert(errorData.message);
                     return;
                 } else {
-                    // Handle other errors based on status code or other error messages
                     throw new Error(errorData.message || `HTTP error! status: ${response.status}`);
                 }
             }
@@ -216,6 +211,8 @@ const TimeLine = ({ theme }) => {
                         timestamp={post.createdAt}
                         text={post.text}
                         imageUrl={post.imageUrl}
+                        likeCount={post.likeCount}
+                        userLiked={post.userLiked}
                         onEdit={() => handleEdit(post._id)}
                         onDelete={() => handleDeletePost(post._id)}
                         onUserClick={() => handleUserClick(post.createdBy._id,

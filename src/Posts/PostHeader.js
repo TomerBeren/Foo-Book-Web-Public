@@ -4,7 +4,7 @@ import PostContent from "./PostContent";
 import PostOptionsMenu from "./PostOptionsMenu";
 
 
-const PostHeader = ({ timestamp, text, imageUrl, onEdit, onDelete, theme , author, profilepic, onUserClick, postId }) => {
+const PostHeader = ({ timestamp, text, imageUrl, onEdit, onDelete, theme , author, profilepic, onUserClick, postId, likeCount, userLiked}) => {
    
     return (
         <div className={`p-4 rounded shadow mt-3 mb-2 ${theme === 'dark' ? 'text-white bg-dark' : 'bg-white'}`}>
@@ -19,7 +19,7 @@ const PostHeader = ({ timestamp, text, imageUrl, onEdit, onDelete, theme , autho
                 <PostOptionsMenu onEdit={onEdit} onDelete={onDelete} />
             </div>
 
-            <PostContent theme={theme} text={text} imageUrl={imageUrl} postId={postId} />
+            <PostContent theme={theme} text={text} imageUrl={imageUrl} postId={postId} userLiked={userLiked} likeCount={likeCount} />
         </div>
     );
 };
