@@ -195,7 +195,7 @@ const TimeLine = ({ theme }) => {
     };
 
     return (
-        <div className="timeline-container col-12 col-md-6">
+        <div className="timeline-container col-12 col-md-5">
             <div className="d-flex flex-column justify-content-center w-100 mx-auto" style={{ paddingTop: '50px', maxWidth: '680px' }}>
                 <Stories theme={theme} />
                 {!isFiltered && (<CreatePostComponent theme={theme} OnCreatePost={handleAddNewPost} />)}
