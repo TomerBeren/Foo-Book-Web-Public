@@ -138,8 +138,8 @@ const Chatbar = ({ theme }) => {
   }
 
   return (
-    <div className="chatbar-container col-md-3 d-none d-md-block" style={{ position: 'relative' }}>
-      <div className={`d-flex h-100 overflow-hidden scrollbar ${theme === 'dark' ? 'text-white bg-black' : ''}`}
+    <div className="chatbar-container col-md-3">
+      <div className={`h-100 overflow-visible scrollbar ${theme === 'dark' ? 'text-white bg-black' : ''}`}
         style={{ maxWidth: "360px", width: "100%", zIndex: 4, paddingTop: "50px", position: 'absolute', right: 0 }}>
         <div className="p-3 mt-4">
           <SponsoredSection theme={theme} />
@@ -164,7 +164,7 @@ const Chatbar = ({ theme }) => {
               name={friendList.displayname}
               onRight={() => deleteFriend(friendList._id)}
               onLeft={() => showFriends(friendList._id, friendList.displayname, friendList.profilepic)}
-              leftButtonLabel="Show Friends"
+              leftButtonLabel="Friends"
               rightButtonLabel="Delete" />
           ))}
           {showingFriends && (
