@@ -88,8 +88,8 @@ const LoginForm = () => {
             console.log("Fetched User Details:", userDetailsJson);
 
             setUserDetails({
-                displayName: userDetailsJson.displayName,
-                profilePic: userDetailsJson.profilePic,
+                displayName: userDetailsJson.displayname,
+                profilePic: userDetailsJson.profilepic,
                 friendsList: userDetailsJson.friendsList, // Adjust these keys based on your actual user details structure
             });
 
