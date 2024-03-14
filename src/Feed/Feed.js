@@ -38,7 +38,6 @@ const Feed = () => {
 
                 } catch (error) {
                     console.error("Error fetching user details:", error);
-                    // Optionally handle logout or redirection to login
                 }
             };
             fetchUserDetails();

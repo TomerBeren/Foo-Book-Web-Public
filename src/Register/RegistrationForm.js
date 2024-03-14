@@ -26,7 +26,7 @@ const RegistrationForm = () => {
       });
       const data = await response.json();
       if (!response.ok) throw new Error(data.message || 'Error checking username');
-      setUsernameValidation({ isValid: data.available }); // Update based on availability
+      setUsernameValidation({ isValid: data.available }); 
       if (data.available === false) {
         setErrors(prevErrors => ({ ...prevErrors, username: 'Username is already taken.' }));
       } else {
@@ -99,7 +99,7 @@ const RegistrationForm = () => {
       profilePic: profilePicPreview,
     };
 
-    delete submissionData.confirmpassword; // Assuming you don't want to send this to the server
+    delete submissionData.confirmpassword; 
     delete submissionData.profilepic;
     try {
       const response = await fetch('http://localhost:8080/api/users', {

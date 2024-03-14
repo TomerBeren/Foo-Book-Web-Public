@@ -7,8 +7,6 @@ import ContactsHeader from "./ContactsHeader";
 
 const friendListModal = ({ show, onHide, theme, author, profilepic, friendsList }) => {
 
-
-
     return (
         <Modal show={show} onHide={onHide} centered>
             <Modal.Header closeButton>

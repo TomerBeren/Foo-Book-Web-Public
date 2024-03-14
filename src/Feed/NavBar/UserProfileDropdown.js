@@ -10,7 +10,6 @@ const UserProfileDropdown = ({ isCaret }) => {
     const [userId] = useState(localStorage.getItem('userId'))
     const [token] = useState(localStorage.getItem('token'));
     const { userDetails, setUserDetails } = useUser();
-    // State to control the visibility of the EditUserModal
     const [showEditModal, setShowEditModal] = useState(false);
 
     // Function to open the EditUserModal
@@ -27,7 +26,7 @@ const UserProfileDropdown = ({ isCaret }) => {
     const onDelete = async () => {
         try {
             const response = await fetch(`http://localhost:8080/api/users/${userId}`, {
-                method: "DELETE", // Use PATCH for partial updates
+                method: "DELETE", 
                 headers: {
                     'Authorization': `Bearer ${token}`,
                 },
@@ -67,8 +66,8 @@ const UserProfileDropdown = ({ isCaret }) => {
         };
         console.log(JSON.stringify(payload))
         try {
-            const response = await fetch(`http://localhost:8080/api/users/${userId}`, { // Assuming `userDetails.id` is the correct way to access the user ID
-                method: "PATCH", // Use PATCH for partial updates
+            const response = await fetch(`http://localhost:8080/api/users/${userId}`, { 
+                method: "PATCH", 
                 headers: {
                     'Content-Type': 'application/json',
                     'Authorization': `Bearer ${token}`,
@@ -80,15 +79,13 @@ const UserProfileDropdown = ({ isCaret }) => {
                 throw new Error(`HTTP error! status: ${response.status}`);
             }
 
-            // Assuming the response includes the updated user data
             const updatedUser = await response.json();
             console.log(updatedUser.user.displayName)
             console.log(updatedUser.user.profilePic)
-            // Correct way to update userDetails using setUserDetails
             setUserDetails(currentDetails => ({
                 ...currentDetails,
-                displayName: updatedUser.user.displayName, // Adjusted to match the server's response
-                profilePic: updatedUser.user.profilePic // Adjusted to match the server's response
+                displayName: updatedUser.user.displayName, 
+                profilePic: updatedUser.user.profilePic 
             }));
         
             alert('User profile updated successfully!');
