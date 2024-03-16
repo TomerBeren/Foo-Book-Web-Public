@@ -13,6 +13,7 @@ FooBook_Web is the React-based frontend for the Foobook social media platform, d
   - Clicking on a user's profile picture or name on a post filters the posts to show only theirs. A "Back to All Posts" button allows returning to the full post view.
   - If the viewed profile is not a friend, a profile modal with an "Add Friend" button will appear instead.
   - If a friend request has already been sent to a user, an alert will notify that a new request cannot be sent.
+  - If a user attempts to send a friend request to someone who has already sent them a request, the application will display an alert. This alert informs the user that a friend request has already been sent, advising them to check their pending requests. suggesting the user can simply accept the pending request instead of sending a new one.
 - **Friend Management**:
   - The friend request list is visible on the right side of the post list, where incoming requests can be accepted or declined.
   - Accepting a friend request adds the user to your friend list and to the users friend list, while declining removes the request.
