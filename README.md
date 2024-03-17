@@ -54,3 +54,24 @@ npm start
 FooBook_Web is the frontend part of the Foobook social media platform. To utilize all features, such as posting, friend requests, and profile management, the backend server (Foobook_Server) must be operational.
 
 For more details on setting up and running the backend, refer to the FooBook_Server README at https://github.com/TomerBeren/FooBook_Server.
+
+## Photos
+
+![Screenshot 2024-03-16 180916](https://github.com/TomerBeren/FooBook_Web/assets/118894673/7598fe1f-1407-4af9-932f-a213a0c6ff0d)
+![Screenshot 2024-03-16 180933](https://github.com/TomerBeren/FooBook_Web/assets/118894673/673e050a-9909-43b6-a413-03550439a0b7)
+![Screenshot 2024-03-16 180939](https://github.com/TomerBeren/FooBook_Web/assets/118894673/e48ccfca-9cd6-4583-87e7-fd9d5c902fdd)
+![Screenshot 2024-03-16 180953](https://github.com/TomerBeren/FooBook_Web/assets/118894673/d94e0f37-5ad3-408c-876e-44fab059de71)
+![Screenshot 2024-03-16 181037](https://github.com/TomerBeren/FooBook_Web/assets/118894673/2bc2804b-5592-46db-9465-d9bc3a129f4b)
+![Screenshot 2024-03-16 181054](https://github.com/TomerBeren/FooBook_Web/assets/118894673/2aabe906-e86d-4da3-b1cd-6daf871ca5ad)
+![Screenshot 2024-03-16 181132](https://github.com/TomerBeren/FooBook_Web/assets/118894673/7b3a13a5-3d91-4e81-b777-30da9183e28d)
+
+
+
+
+
+
+
+
+
+
+
