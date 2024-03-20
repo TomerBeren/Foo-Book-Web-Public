@@ -9,7 +9,7 @@ const Navbar = ({ theme }) => {
     const { userDetails } = useUser();
 
     return (
-        <div className={`d-flex align-items-center fixed-top shadow ${theme === 'dark' ? 'text-white bg-dark' : 'bg-white'}`} style={{ minHeight: '56px', zIndex: 5 }}>
+        <div className={`d-flex align-items-center fixed-top shadow pad ${theme === 'dark' ? 'text-white bg-dark' : 'bg-white'}`} style={{ minHeight: '56px', zIndex: 5 }}>
             <div className="container-fluid">
                 <div className="row align-items-center">
                     <div className="col d-flex align-items-center">

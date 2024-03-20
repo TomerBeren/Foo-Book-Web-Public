@@ -6,6 +6,13 @@
   font-size: 4rem;
 }
 
+body.modal-open {
+  overflow: scroll !important;
+  padding-right: 0px !important;
+}
+.pad{
+  padding-right: 0px !important;
+}
 @media (max-width: 1100px) {
   .timeline-container {
     max-width: 66.66666667%; /* Approx. 8 cols */
