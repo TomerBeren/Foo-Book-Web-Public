@@ -4,8 +4,10 @@ import DropdownItem from './DropdownItem';
 import ProfileActionItem from './ProfileActionItem';
 import EditUserModal from './EditUserModal'; // Ensure you have this component
 import { useNavigate } from 'react-router-dom';
+import { useAuth } from '../../Authorization/AuthContext';
 
 const UserProfileDropdown = ({ isCaret }) => {
+    const { logout } = useAuth();
     const navigate = useNavigate();
     const [userId] = useState(localStorage.getItem('userId'))
     const [token] = useState(localStorage.getItem('token'));
@@ -41,6 +43,7 @@ const UserProfileDropdown = ({ isCaret }) => {
             
             alert('User deleted successfully!');
             onHideEditModal(); 
+            logout();
             navigate('/login');
 
         } catch (error) {
