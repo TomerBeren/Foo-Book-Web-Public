@@ -17,27 +17,28 @@ const TimeLine = ({ theme }) => {
     const [showNonFriendProfile, setNonFriendProfile] = useState(false);
     const [clickedUserInfo, setClickedUserInfo] = useState(null)
 
-    useEffect(() => {
-        const fetchPosts = async () => {
-            try {
-                const response = await fetch(`http://localhost:8080/api/posts`, {
-                    method: 'GET', 
-                    headers: {
-                        'Content-Type': 'application/json',
-                        'Authorization': `Bearer ${token}`,
-                    },
-                });
-                if (!response.ok) {
-                    throw new Error(`HTTP error! status: ${response.status}`);
-                }
-                const data = await response.json();
-                const combinedPosts = [...data.friendsPosts, ...data.nonFriendsPosts];
-                setAllPosts(combinedPosts);
-                setPosts(combinedPosts);
-            } catch (error) {
-                console.error('Fetching posts failed:', error);
+    const fetchPosts = async () => {
+        try {
+            const response = await fetch(`http://localhost:8080/api/posts`, {
+                method: 'GET',
+                headers: {
+                    'Content-Type': 'application/json',
+                    'Authorization': `Bearer ${token}`,
+                },
+            });
+            if (!response.ok) {
+                throw new Error(`HTTP error! status: ${response.status}`);
             }
-        };
+            const data = await response.json();
+            const combinedPosts = [...data.friendsPosts, ...data.nonFriendsPosts];
+            setAllPosts(combinedPosts);
+            setPosts(combinedPosts);
+        } catch (error) {
+            console.error('Fetching posts failed:', error);
+        }
+    };
+
+    useEffect(() => {
         fetchPosts();
     }, [userDetails]);
 
@@ -80,7 +81,7 @@ const TimeLine = ({ theme }) => {
                 },
             });
 
-            const data = await response.json(); 
+            const data = await response.json();
 
             if (!response.ok) {
                 throw new Error(data.message || 'An error occurred while trying to delete the post');
@@ -127,7 +128,7 @@ const TimeLine = ({ theme }) => {
 
         try {
             const response = await fetch(`http://localhost:8080/api/users/${userId}/posts/${postId}`, {
-                method: 'PATCH', 
+                method: 'PATCH',
                 headers: {
                     'Content-Type': 'application/json',
                     'Authorization': `Bearer ${token}`,
@@ -183,9 +184,9 @@ const TimeLine = ({ theme }) => {
         }
     };
 
-    const resetFilter = () => {
+    const resetFilter = async () => {
         setNonFriendProfile(false);
-        setPosts(allPosts); // Reset posts to show the original feed
+        await fetchPosts();
         setIsFiltered(false); // Reset the filtered state
     };
 
