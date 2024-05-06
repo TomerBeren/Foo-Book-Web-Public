@@ -2,9 +2,10 @@ import React, { useState, forwardRef, useImperativeHandle } from 'react';
 import Avatar from './Avatar';
 import EmojiPicker from './EmojiPicker'; 
 import UploadButton from './UploadButton'; 
-import defaultPic from '../defaultpic.png';
+import { useUser } from '../UserContext';
 
 const CreatePostForm = forwardRef(({ onFormSubmit }, ref) => {
+    const { userDetails} = useUser();
     const [postText, setPostText] = useState('');
     const [imageUrl, setImageUrl] = useState('');
 
@@ -28,9 +29,9 @@ const CreatePostForm = forwardRef(({ onFormSubmit }, ref) => {
         <form onSubmit={handleSubmit} className="d-flex flex-column">
             <div className="d-flex align-items-center">
                 <div className="p-2">
-                    <Avatar src={defaultPic} alt="from fb" />
+                    <Avatar src={userDetails.profilePic} alt="from fb" />
                 </div>
-                <p className="m-0 fw-bold">Tomer</p>
+                <p className="m-0 fw-bold">{userDetails.displayName}</p>
             </div>
             <textarea
                 cols="30"

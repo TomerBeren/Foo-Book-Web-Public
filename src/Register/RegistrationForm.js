@@ -15,18 +15,37 @@ const RegistrationForm = () => {
   const [errors, setErrors] = useState({});
   const [profilePicPreview, setProfilePicPreview] = useState(defaultpic);
   const [showModal, setShowModal] = useState(false);
+  const [usernameValidation, setUsernameValidation] = useState({
+    isValid: true,
+  });
 
-  // Validation checks
+  const checkUsernameAvailability = async (username) => {
+    try {
+      const response = await fetch(`http://localhost:8080/api/users/check-username?username=${username}`, {
+        method: 'GET'
+      });
+      const data = await response.json();
+      if (!response.ok) throw new Error(data.message || 'Error checking username');
+      setUsernameValidation({ isValid: data.available }); 
+      if (data.available === false) {
+        setErrors(prevErrors => ({ ...prevErrors, username: 'Username is already taken.' }));
+      } else {
+        setErrors(prevErrors => ({ ...prevErrors, username: '' }));
+      }
+    } catch (error) {
+      console.error('Error checking username availability:', error);
+    }
+  };
+
   const validateField = (name, value) => {
     if (!value.trim()) {
       return `${name.charAt(0).toUpperCase() + name.slice(1)} is required.`; // Capitalize field name for the message
     }
-    
+
     switch (name) {
       case 'username':
-        const users = JSON.parse(sessionStorage.getItem('users') || '[]');
-        if (users.find(user => user.username === value)) {
-          return 'Username is already taken.';
+        if (!usernameValidation.isValid) {
+          return 'Username is already taken.'
         }
         break;
       case 'password':
@@ -44,41 +63,74 @@ const RegistrationForm = () => {
     }
     return '';
   };
-  
 
   const handleInputChange = (e) => {
     const { name, value } = e.target;
     const error = validateField(name, value);
     setFormData(prev => ({ ...prev, [name]: value }));
     setErrors(prev => ({ ...prev, [name]: error }));
+    if (name === 'username' && value !== '') {
+      checkUsernameAvailability(value);
+    }
   };
 
-  const handleRegisterSubmit = (e) => {
+  const handleRegisterSubmit = async (e) => {
     e.preventDefault();
-    let isValid = true;
 
-    // Re-validate all fields
-    const validationErrors = {};
+    let validationErrors = {};
+    let isFormValid = true;
+
     Object.keys(formData).forEach(key => {
       const error = validateField(key, formData[key]);
       if (error) {
         validationErrors[key] = error;
-        isValid = false;
+        isFormValid = false;
       }
     });
 
-    if (!isValid) {
+    if (!isFormValid) {
       setErrors(validationErrors);
       alert("Please correct the errors before submitting.");
       return;
     }
 
-    const users = JSON.parse(sessionStorage.getItem('users') || '[]');
-    users.push({ ...formData });
-    sessionStorage.setItem('users', JSON.stringify(users));
-    alert('Registration successful!');
-    setShowModal(false);
-    resetForm();
+    const submissionData = {
+      ...formData,
+      profilePic: profilePicPreview,
+    };
+
+    delete submissionData.confirmpassword; 
+    delete submissionData.profilepic;
+    try {
+      const response = await fetch('http://localhost:8080/api/users', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify(submissionData),
+      });
+
+      const data = await response.json();
+
+      if (response.ok) {
+        console.log('Registration successful:', data);
+        alert('Registration successful!');
+        setShowModal(false);
+        resetForm();
+      } else {
+        console.error('Registration error:', data);
+        // Update errors state based on the response, maintaining other errors
+        setErrors(prevErrors => ({
+          ...prevErrors,
+          ...validationErrors,
+          ...(data.errors || {}),
+          ...(response.status === 400 && data.message === 'Username already taken' ? { username: 'Username is already taken.' } : {})
+        }));
+      }
+    } catch (error) {
+      console.error('There was an error!', error);
+      alert('An error occurred. Please try again.');
+    }
   };
 
   const resetForm = () => {
@@ -105,14 +157,6 @@ const RegistrationForm = () => {
     }
   };
 
-  const fields = registrationFields.map(field => ({
-    ...field,
-    value: formData[field.name],
-    onChange: field.type === 'file' ? handleProfilePicChange : handleInputChange,
-    className: errors[field.name] ? 'is-invalid' : formData[field.name] ? 'is-valid' : '',
-    errorMessage: errors[field.name],
-  }));
-
   const handleShowModal = () => setShowModal(true);
 
   const onHideModal = () => {
@@ -130,7 +174,13 @@ const RegistrationForm = () => {
       <RegistrationModal
         show={showModal}
         onHide={onHideModal}
-        fields={fields}
+        fields={registrationFields.map(field => ({
+          ...field,
+          value: formData[field.name],
+          onChange: field.type === 'file' ? handleProfilePicChange : handleInputChange,
+          className: errors[field.name] ? 'is-invalid' : formData[field.name] ? 'is-valid' : '',
+          errorMessage: errors[field.name],
+        }))}
         handleSubmit={handleRegisterSubmit}
         submitLabel="Sign Up"
         errors={errors}

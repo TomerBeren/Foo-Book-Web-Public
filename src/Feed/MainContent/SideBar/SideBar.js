@@ -1,6 +1,5 @@
 import React from 'react';
 import SideBarItem from './SideBarItem';
-import defaultPic from '../../../defaultpic.png'
 import freindPic from '../../../Photos/friend.png'
 import memoryPic from '../../../Photos/memories.png'
 import savedPic from '../../../Photos/saved.png'
@@ -8,10 +7,13 @@ import groupPic from '../../../Photos/groups.png'
 import facebookPic from '../../../Photos/facebook.png'
 import SeeMoreButton from './SeeMoreButton';
 import MemoryItem from './MemoryItem';
+import { useUser } from '../../../UserContext';
 
 const Sidebar = ({theme}) => {
+    const { userDetails} = useUser();
+
     const sidebarItems = [
-        { icon: defaultPic, label: 'Tomer', link: '#' },
+        { icon: userDetails.profilePic, label: userDetails.displayName, link: '#' },
         { icon: freindPic, label: 'Friends', link: '#' },
         { icon: memoryPic, label: 'Memories', link: '#' },
         { icon: savedPic, label: 'Saved', link: '#' },
@@ -20,8 +22,8 @@ const Sidebar = ({theme}) => {
     ];
 
     return (
-        <div className="sidebar-container col-md-3 d-none d-md-block">
-            <div className={`h-100 overflow-hidden scrollbar ${theme === 'dark' ? 'text-white bg-black' : ''}`} style={{ maxWidth: '360px', width: '100%', zIndex: 4 }}>
+        <div className="sidebar-container col-12 col-md-3">
+            <div className={`h-100 overflow-visible scrollbar d-none d-xl-block ${theme === 'dark' ? 'text-white bg-black' : ''}`} style={{ maxWidth: '360px', width: '100%', zIndex: 4, position: 'absolute', left: 0 }}>
                 <ul className="navbar-nav mt-4 ms-3 d-flex flex-column pb-5 mb-5" style={{ paddingTop: '50px' }}>
                     {sidebarItems.map((item, index) => (
                         <SideBarItem key={index} icon={item.icon} label={item.label} link={item.link} />
@@ -36,7 +38,7 @@ const Sidebar = ({theme}) => {
                     <MemoryItem src="https://source.unsplash.com/random/14" label="Archive" />
                     <MemoryItem src="https://source.unsplash.com/random/15" label="Activities" />
                     <MemoryItem src="https://source.unsplash.com/random/16" label="Games" />
-                    <MemoryItem src="https://source.unsplash.com/random/17" label="Favourits" />
+                    <MemoryItem src="https://source.unsplash.com/random/17" label="Favourites" />
                     <MemoryItem src="https://source.unsplash.com/random/18" label="Stories" />
                 </ul>
 

@@ -25,14 +25,14 @@ const EditPostModal = ({ show, onHide, post, onSave }) => {
   };
 
   const handleSave = () => {
-    onSave(post.id, text, selectedFile, isPictureRemoved);
+    onSave(post._id, text, selectedFile, isPictureRemoved);
     onHide();
   };
 
   const handleRemovePicture = () => {
     setSelectedFile(null);
     setIsPictureRemoved(true);
-    onSave(post.id, text, null, true); 
+    onSave(post._id, text, null, true); 
     onHide();
 };
 

@@ -1,116 +1,77 @@
-# FooBook
+# FooBook_Web
 
-Part 2 of the final project in the advnaced systems programming course.
+FooBook_Web is the React-based frontend for the Foobook social media platform, designed to interact seamlessly with the Foobook_Server's API endpoints. This client-side application provides users with an intuitive interface to engage with the platform's core features, including post creation, friend management, and user profile customization.
+
+## Features
+
+- **Post Viewing**: Users can see the first 20 posts of their friends sorted by the most recent first, followed by the first 5 posts from non-friends, sorted in the same manner.
+- **User Posts**: The user is considered their own friend, so their posts will appear within the first 20 posts.
+- **Post Interaction**: Users can only edit or delete their own posts. Attempting to modify posts not authored by them is not permitted.
+- **Liking Posts**: 
+  - When a user likes a post, the like button changes to "Unlike" and the like icon turns blue, indicating that the user has liked the post. Pressing "Unlike" will revert the icon to its default state and change the button back to "Like."
+- **Profile Interaction**:
+  - Clicking on a user's profile picture or name on a post filters the posts to show only theirs. A "Back to All Posts" button allows returning to the full post view.
+  - If the viewed profile is not a friend, a profile modal with an "Add Friend" button will appear instead.
+  - If a friend request has already been sent to a user, an alert will notify that a new request cannot be sent.
+  - If a user attempts to send a friend request to someone who has already sent them a request, the application will display an alert. This alert informs the user that a friend request has already been sent, advising them to check their pending requests. suggesting the user can simply accept the pending request instead of sending a new one.
+- **Friend Management**:
+  - The friend request list is visible on the right side of the post list, where incoming requests can be accepted or declined.
+  - Accepting a friend request adds the user to your friend list and to the users friend list, while declining removes the request.
+  - The friend list allows users to view their friends' friend lists or delete friends. Deleting a friend removes the user from the friend's list as well, ensuring mutual friendship management.
+- **User Profile Editing**:
+  - Clicking the "vv" button at the top right opens a menu for editing the user's display name or profile picture and provides an option to delete the user account, which also deletes all associated posts.
 
 ## Getting Started
 
-Follow these instructions to get a copy of the project up and running on your local machine for development and testing purposes.
+To fully experience FooBook_Web's functionalities, ensure that the `Foobook_Server` is running, as this frontend application relies on its API endpoints for data.
 
 ### Prerequisites
 
-What you need to install the software:
-
-```bash
+- A running instance of Foobook_Server
 - Node.js
-- npm
-```
+- npm or yarn
 
-### Installing
+### Installation
 
-Step by step series to get a development environment running:
-
-1. Clone the repo or download the ZIP file
+Clone the repository and install dependencies:
 
 ```bash
 git clone https://github.com/TomerBeren/FooBook_Web
-```
-
-Or download and extract the ZIP file from the GitHub repository page.
-
-2. Navigate to the project directory
-
-```bash
-cd path/to/your-project
-```
-
-3. Install dependencies
-
-```bash
+cd FooBook_Web
 npm install
 ```
 
-4. Start the development server
+The FooBook_Server comes pre-packaged with the latest build of the FooBook_Web application, making it unnecessary to run the React development client to access the web interface.
+
+If for any reason you wish to run the FooBook_Web seperately you can use the following command:
 
 ```bash
 npm start
 ```
 
-The app should now be running on http://localhost:3000.
+## Note
 
-## Running the Tests
+FooBook_Web is the frontend part of the Foobook social media platform. To utilize all features, such as posting, friend requests, and profile management, the backend server (Foobook_Server) must be operational.
 
-To run the tests use this command:
+For more details on setting up and running the backend, refer to the FooBook_Server README at https://github.com/TomerBeren/FooBook_Server.
 
-```bash
-npm test
-```
-If the test didnt run all tests press a.
+## Photos
 
-
-## Login
-
-To login use our hardoced credentials:
-
-Username: Tomer
-Password: a5k8b123
-
-## Registration
-
-If you register and then try to register with the same username you will get an error
-becuase we used local session for this step before implementing a hardcoded user.
+![Screenshot 2024-03-16 180916](https://github.com/TomerBeren/FooBook_Web/assets/118894673/7598fe1f-1407-4af9-932f-a213a0c6ff0d)
+![Screenshot 2024-03-16 180933](https://github.com/TomerBeren/FooBook_Web/assets/118894673/673e050a-9909-43b6-a413-03550439a0b7)
+![Screenshot 2024-03-16 180939](https://github.com/TomerBeren/FooBook_Web/assets/118894673/e48ccfca-9cd6-4583-87e7-fd9d5c902fdd)
+![Screenshot 2024-03-16 180953](https://github.com/TomerBeren/FooBook_Web/assets/118894673/d94e0f37-5ad3-408c-876e-44fab059de71)
+![Screenshot 2024-03-16 181037](https://github.com/TomerBeren/FooBook_Web/assets/118894673/2bc2804b-5592-46db-9465-d9bc3a129f4b)
+![Screenshot 2024-03-16 181054](https://github.com/TomerBeren/FooBook_Web/assets/118894673/2aabe906-e86d-4da3-b1cd-6daf871ca5ad)
+![Screenshot 2024-03-16 181132](https://github.com/TomerBeren/FooBook_Web/assets/118894673/7b3a13a5-3d91-4e81-b777-30da9183e28d)
 
 
-## Feed
-
-- **Adding a Post:** To add a post, click the "What's on your mind" button. Blank posts are permitted.
-- **Editing/Deleting a Post:** To edit or delete a post, click the edit button located in the upper right corner of the post.
-- **Editing functionalities:** Change the text if wanted, change the photo if wanted or remove the current photo of the post. If no photo exists their will be no button to remove it.
-- **Commenting on a Post:** To comment on a post, you can either click the upside-down arrow or the comment button.
-- **Adding a Comment:** To add a comment, type your text into the input box and press enter.
-- **Editing a Comment:** To edit a comment, click the edit button, make your changes, and then click save.
-- **Deleting a Comment:** To delete a comment, click the delete button.
-- **Liking a Post:** To like a post, simply click the like button.
-- **Logging Out:** To logout, click the logout button located on the lower left side of the page.
-- **Dark Mode:** To switch to dark mode, press the dark mode button on the lower left side.
-
-## Feed Security
-
-- **Direct URL Access:** Attempting to directly access the feed by changing the URL to `/feed` will not work if you are not logged in.
-- **Session Persistence:** If you log in and then press the back button on your browser, you will still have access to the feed because you have not logged out.
-- **Logout Restriction:** Once you log out, direct access to the feed page will be restricted again, securing the feed page from unauthorized access.
-
-## Development Approach
-
-### Initial Design with HTML
-
-For our project, we initially wanted to layout everything using simple HTML. This step was crucial for us to visualize the overall design and structure of our application. It allowed us to see how each page would look and how users would interact with the basic elements.
-
-### Transitioning to React
-
-Once we had the HTML pages looking the way we wanted, we knew it was time to transition into React. So, we started sorting the repeated HTML code into React components. This approach wasn't just about adopting a new technology; it was about making our code cleaner, more modular, and easier to maintain. By identifying common patterns and repetitive elements in our HTML designs, we could create reusable components, significantly reducing redundancy and improving our workflow.
-
-#### Component Creation
-
-This process involved breaking down the entire application into smaller, manageable pieces. Each component was then developed to handle a specific piece of the application's functionality. For example, we created components for the navigation bar, posts, comments, and the login and registration forms.
-
-#### Logic Integration
-
-After sorting our HTML into React components, we began integrating the logic into each component. This step was about making sure that each part of the application didn't just look right but also worked right. We added state management to handle user interactions, implemented routing to navigate between different parts of the application and many more.
 
 
-### Summary
 
-In summary, we started with simple HTML to get a clear idea of our application's look and feel. Then, by transitioning to React, we organized our code into components, making our project more scalable and maintainable. This approach also allowed us to implement complex functionalities more efficiently, turning our initial designs into a fully functional web application.
+
+
+
 
 
 
