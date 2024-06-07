@@ -17,9 +17,9 @@ When a user attempts to create or edit a post that includes URLs, the web client
 
 ## Additional Notes
 
-This branch is focused on security enhancements related to URL processing. For comprehensive documentation on other aspects of the web client, including more detailed features and functionalities, please refer to the main documentation available in the `server-dev` branch or our [Wiki](https://github.com/TomerBeren/FooBook_Server/tree/tcp-server-main) in the tcp-server-main branch of the FooBook_Server repository .
+This branch is focused on security enhancements related to URL processing. For comprehensive documentation on other aspects of the web client, including more detailed features and functionalities, please refer to the main documentation available in the `server-dev` branch or our [Wiki](https://github.com/TomerBeren/FooBook-Server-Public/tree/tcp-server-main/wiki) in the tcp-server-main branch of the FooBook_Server repository .
 
 ## Reference
 
 For a detailed README of the web client itself and more in-depth technical details, please refer to:
-- [Main Web Client Documentation](https://github.com/TomerBeren/FooBook_Web/tree/server-dev)
+- [Main Web Client Documentation](https://github.com/TomerBeren/FooBook-Web-Public/tree/server-dev)
