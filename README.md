@@ -1,6 +1,6 @@
 # FooBook
 
-Part 2 of the final project in the advnaced systems programming course.
+This branch is the initial version of the project without server integration and is not fully complete. The final, ready product with full server integration is available under the tcp-main-server branch.
 
 ## Getting Started
 
