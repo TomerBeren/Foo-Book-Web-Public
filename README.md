@@ -1,6 +1,6 @@
 # FooBook
 
-This branch is the initial version of the project without server integration and is not fully complete. The final, ready product with full server integration is available under the tcp-main-server branch.
+This branch is the initial version of the project without server integration and is not fully complete. The full README and additional documentation for the project can be found under the [server-dev](https://github.com/TomerBeren/FooBook-Web-Public/tree/server-dev) branch. The final product, including full server integration, is available under the [tcp-main-server](https://github.com/TomerBeren/FooBook-Web-Public/tree/tcp-server-main) branch.
 
 ## Getting Started
 
