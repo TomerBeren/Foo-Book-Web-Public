@@ -6,6 +6,47 @@
   font-size: 4rem;
 }
 
+body.modal-open {
+  overflow: scroll !important;
+  padding-right: 0px !important;
+}
+.pad{
+  padding-right: 0px !important;
+}
+@media (max-width: 1100px) {
+  .timeline-container {
+    max-width: 66.66666667%; /* Approx. 8 cols */
+    flex: 0 0 66.66666667%;
+  }
+
+  .chatbar-container {
+    display: block; /* Make sure the chat bar is visible */
+    max-width: 33.33333333%; /* Approx. 4 cols */
+    flex: 0 0 33.33333333%;
+  }
+
+  .sidebar-container {
+    display: none; /* Hide the sidebar */
+  }
+}
+
+@media (max-width: 960px) {
+  .timeline-container {
+    max-width: 60%; /* Reduce to prevent overlap, adjust as needed */
+    flex: 0 0 60%;
+  }
+
+  .chatbar-container {
+    display: block;
+    max-width: 40%; /* Adjusted to fit without overlap, adjust as needed */
+    flex: 0 0 40%;
+  }
+
+  .sidebar-container {
+    display: none;
+  }
+}
+
 @media (max-width: 768px) {
 
   /* Hide Sidebar and Chatbar on smaller screens */

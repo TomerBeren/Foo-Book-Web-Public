@@ -1,7 +1,7 @@
 import React, { useRef } from 'react';
 import { Modal, Button } from 'react-bootstrap';
 import CreatePostForm from './CreatePostForm';
-import defaultPic from '../defaultpic.png'
+
 const CreatePostModal = ({ isOpen, onRequestClose, onCreatePost }) => {
     const formRef = useRef();
 
@@ -19,10 +19,6 @@ const CreatePostModal = ({ isOpen, onRequestClose, onCreatePost }) => {
                 <CreatePostForm ref={formRef} onFormSubmit={(formData) => {
                     const newPost = {
                         ...formData,
-                        author: "Tomer",
-                        id: new Date().getTime(),
-                        profilePic: defaultPic,
-                        timestamp: new Date().toLocaleString(),
                     };
                     onCreatePost(newPost);
                     onRequestClose();

@@ -6,21 +6,24 @@ import LogoText from './Login/LogoText';
 import Feed from './Feed/Feed';
 import { AuthProvider } from './Authorization/AuthContext';
 import ProtectedRoute from './Authorization/ProtectedRoute';
+import { UserProvider } from './UserContext';
 
 const App = () => {
   return (
     <Router>
       <AuthProvider>
-        <Routes>
-          <Route path="/login" element={
-            <Header>
-              <LogoText />
-              <LoginForm />
-            </Header>
-          } />
-          <Route path="/feed" element={<ProtectedRoute><Feed /></ProtectedRoute>} />
-          <Route path="/" element={<Navigate replace to="/login" />} />
-        </Routes>
+        <UserProvider> {/* Move UserProvider here to wrap all routes */}
+          <Routes>
+            <Route path="/login" element={
+              <Header>
+                <LogoText />
+                <LoginForm />
+              </Header>
+            } />
+            <Route path="/feed" element={<ProtectedRoute><Feed /></ProtectedRoute>} />
+            <Route path="/" element={<Navigate replace to="/login" />} />
+          </Routes>
+        </UserProvider>
       </AuthProvider>
     </Router>
   );

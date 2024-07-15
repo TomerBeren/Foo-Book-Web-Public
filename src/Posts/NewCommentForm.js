@@ -1,8 +1,9 @@
 import React, { useState } from 'react';
 import Avatar from '../CreatePosts/Avatar';
-import defaultPic from '../defaultpic.png';
+import { useUser } from '../UserContext';
 
 const NewCommentForm = ({ onCommentSubmit, comments, onEditComment, onDeleteComment, theme }) => {
+    const { userDetails } = useUser();
     const [commentText, setCommentText] = useState('');
     const [isEditing, setIsEditing] = useState(null);
     const [editText, setEditText] = useState('');
@@ -31,7 +32,7 @@ const NewCommentForm = ({ onCommentSubmit, comments, onEditComment, onDeleteComm
             {comments.map(({ id, text }) => (
                 <div key={id} className="comments-list d-flex flex-row align-items-center my-1 ">
                     <div className="mt-3">
-                    <Avatar src={defaultPic} alt="profilePic" />
+                        <Avatar src={userDetails.profilePic} alt="profilePic" />
                     </div>
                     <div className="p-2 rounded w-100">
                         {isEditing === id ? (
@@ -43,7 +44,7 @@ const NewCommentForm = ({ onCommentSubmit, comments, onEditComment, onDeleteComm
                             </>
                         ) : (
                             <>
-                                <p className="fw-bold m-0">Tomer</p>
+                                <p className="fw-bold m-0">{userDetails.displayName}</p>
                                 <p className={`m-0 fs-6 p-2 bg-gray rounded ${theme === 'dark' ? 'text-black' : ''}`}>{text}</p>
                             </>
                         )}
@@ -57,7 +58,7 @@ const NewCommentForm = ({ onCommentSubmit, comments, onEditComment, onDeleteComm
                 </div>
             ))}
             <form className="d-flex mt-4" onSubmit={handleSubmit}>
-                <Avatar src={defaultPic} alt="avatar" />
+                <Avatar src={userDetails.profilePic} alt="avatar" />
                 <input type="text" className={`form-control border-0 rounded-pill ${theme === 'dark' ? 'bg-black' : 'bg-gray'}`} placeholder="Write a comment"
                     value={commentText} onChange={(e) => setCommentText(e.target.value)} />
             </form>
