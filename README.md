@@ -3,8 +3,8 @@
 ## Table of Contents
 - [Introduction](#introduction)
 - [Features](#features)
-- [Enhanced URL Security Features](#enhancedurlsecurityfeatures)
-- [Getting Started](#gettingstarted)
+- [Enhanced URL Security Features](#enhanced-url-security-features)
+- [Getting Started](#getting-started)
 - [Note](#note)
 - [Photos](#photos)
   
