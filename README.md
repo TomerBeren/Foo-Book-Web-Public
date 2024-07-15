@@ -1,5 +1,14 @@
 # FooBook_Web
 
+## Table of Contents
+- [Introduction](#introduction)
+- [Features](#features)
+- [Enhanced URL Security Features](#enhancedurlsecurityfeatures)
+- [Getting Started](#gettingstarted)
+- [Note](#note)
+- [Photos](#photos)
+  
+## Introduction
 FooBook_Web is the React-based frontend for the Foobook social media platform, designed to interact seamlessly with the Foobook_Server's API endpoints. This client-side application provides users with an intuitive interface to engage with the platform's core features, including post creation, friend management, and user profile customization.
 
 ## Features
