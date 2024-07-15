@@ -60,7 +60,8 @@ const TimeLine = ({ theme }) => {
             });
 
             if (!response.ok) {
-                throw new Error('Failed to create new post');
+                const errorData = await response.json();
+                throw new Error(errorData.message || 'Failed to create post');
             }
 
             const createdPost = await response.json();
@@ -68,6 +69,7 @@ const TimeLine = ({ theme }) => {
             setPosts(prevPosts => [createdPost, ...prevPosts]);
         } catch (error) {
             console.error('Error creating new post:', error);
+            alert(error.message); // Show error alert with the message
         }
     };
 

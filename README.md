@@ -77,14 +77,3 @@ For more details on setting up and running the backend, including detailed techn
 ![Screenshot 2024-03-16 181037](https://github.com/TomerBeren/FooBook_Web/assets/118894673/2bc2804b-5592-46db-9465-d9bc3a129f4b)
 ![Screenshot 2024-03-16 181054](https://github.com/TomerBeren/FooBook_Web/assets/118894673/2aabe906-e86d-4da3-b1cd-6daf871ca5ad)
 ![Screenshot 2024-03-16 181132](https://github.com/TomerBeren/FooBook_Web/assets/118894673/7b3a13a5-3d91-4e81-b777-30da9183e28d)
-
-
-
-
-
-
-
-
-
-
-
