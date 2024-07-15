@@ -1,25 +1,79 @@
-# TCP Server Integration - Web Client Updates
+# FooBook_Web
 
-This branch of the web client introduces significant enhancements to how the application handles URLs within posts, specifically regarding the detection and blocking of malicious URLs through integration with the TCP server.
+## Table of Contents
+- [Introduction](#introduction)
+- [Features](#features)
+- [Enhanced URL Security Features](#enhanced-url-security-features)
+- [Getting Started](#getting-started)
+- [Note](#note)
+- [Photos](#photos)
+  
+## Introduction
+FooBook_Web is the React-based frontend for the Foobook social media platform, designed to interact seamlessly with the Foobook_Server's API endpoints. This client-side application provides users with an intuitive interface to engage with the platform's core features, including post creation, friend management, and user profile customization.
 
-## Overview
+## Features
 
-In this update, we've enhanced the web client's ability to detect malicious URLs during post creation and editing. The system now actively denies any attempts to create or edit posts containing URLs that are identified as malicious through API calls to the TCP server.
+- **Post Viewing**: Users can see the first 20 posts of their friends sorted by the most recent first, followed by the first 5 posts from non-friends, sorted in the same manner.
+- **User Posts**: The user is considered their own friend, so their posts will appear within the first 20 posts.
+- **Post Interaction**: Users can only edit or delete their own posts. Attempting to modify posts not authored by them is not permitted.
+- **Liking Posts**: 
+  - When a user likes a post, the like button changes to "Unlike" and the like icon turns blue, indicating that the user has liked the post. Pressing "Unlike" will revert the icon to its default state and change the button back to "Like."
+- **Profile Interaction**:
+  - Clicking on a user's profile picture or name on a post filters the posts to show only theirs. A "Back to All Posts" button allows returning to the full post view.
+  - If the viewed profile is not a friend, a profile modal with an "Add Friend" button will appear instead.
+  - If a friend request has already been sent to a user, an alert will notify that a new request cannot be sent.
+  - If a user attempts to send a friend request to someone who has already sent them a request, the application will display an alert. This alert informs the user that a friend request has already been sent, advising them to check their pending requests. suggesting the user can simply accept the pending request instead of sending a new one.
+- **Friend Management**:
+  - The friend request list is visible on the right side of the post list, where incoming requests can be accepted or declined.
+  - Accepting a friend request adds the user to your friend list and to the users friend list, while declining removes the request.
+  - The friend list allows users to view their friends' friend lists or delete friends. Deleting a friend removes the user from the friend's list as well, ensuring mutual friendship management.
+- **User Profile Editing**:
+  - Clicking the "vv" button at the top right opens a menu for editing the user's display name or profile picture and provides an option to delete the user account, which also deletes all associated posts.
 
-## Key Features
-
+## Enhanced URL Security Features
+- **Malicious URL Detection and Blocking**: When a user attempts to create or edit a post that includes URLs, the web client first sends these URLs to the Node.js server. The Node.js server then makes an API call to the TCP server, which checks these URLs against a Bloom filter to determine if they are malicious. If any URL is flagged as malicious by the TCP server, the Node.js server informs the web client, and the post creation or editing action is immediately denied. An alert is subsequently shown to the user, explaining why the post could not be processed.
 - **Enhanced Security Alerts**: Alerts have been updated to provide clearer information regarding the denial of post creation or editing due to the presence of malicious URLs.
-- **Malicious URL Blocking**: Posts containing URLs that are returned as malicious by the TCP server are automatically denied to ensure the integrity and security of the content shared within the platform.
 
-## How It Works
+## Getting Started
 
-When a user attempts to create or edit a post that includes URLs, the web client makes an API call to the TCP server to check these URLs against a Bloom filter. If any URL is flagged as malicious, the action is immediately denied, and an alert is shown to the user explaining why the post could not be processed.
+To fully experience FooBook_Web's functionalities, ensure that the `Foobook_Server` is running, as this frontend application relies on its API endpoints for data.
 
-## Additional Notes
+### Prerequisites
 
-This branch is focused on security enhancements related to URL processing. For comprehensive documentation on other aspects of the web client, including more detailed features and functionalities, please refer to the main documentation available in the `server-dev` branch or our [Wiki](https://github.com/TomerBeren/FooBook-Server-Public/tree/tcp-server-main/wiki) in the tcp-server-main branch of the FooBook_Server repository .
+- A running instance of Foobook_Server
+- Node.js
+- npm or yarn
 
-## Reference
+### Installation
 
-For a detailed README of the web client itself and more in-depth technical details, please refer to:
-- [Main Web Client Documentation](https://github.com/TomerBeren/FooBook-Web-Public/tree/server-dev)
+Clone the repository and install dependencies:
+
+```bash
+git clone https://github.com/TomerBeren/FooBook_Web
+cd FooBook_Web
+npm install
+```
+
+The FooBook_Server comes pre-packaged with the latest build of the FooBook_Web application, making it unnecessary to run the React development client to access the web interface.
+
+If for any reason you wish to run the FooBook_Web seperately you can use the following command:
+
+```bash
+npm start
+```
+
+## Note
+
+FooBook_Web is the frontend part of the Foobook social media platform. To utilize all features, such as posting, friend requests, and profile management, the backend server (Foobook_Server) must be operational.
+
+For more details on setting up and running the backend, including detailed technical documentation and updates, refer to the FooBook_Server [README](https://github.com/TomerBeren/FooBook_Server) and our comprehensive [Wiki](https://github.com/TomerBeren/FooBook-Server-Public/tree/tcp-server-main/wiki).
+
+## Photos
+
+![Screenshot 2024-03-16 180916](https://github.com/TomerBeren/FooBook_Web/assets/118894673/7598fe1f-1407-4af9-932f-a213a0c6ff0d)
+![Screenshot 2024-03-16 180933](https://github.com/TomerBeren/FooBook_Web/assets/118894673/673e050a-9909-43b6-a413-03550439a0b7)
+![Screenshot 2024-03-16 180939](https://github.com/TomerBeren/FooBook_Web/assets/118894673/e48ccfca-9cd6-4583-87e7-fd9d5c902fdd)
+![Screenshot 2024-03-16 180953](https://github.com/TomerBeren/FooBook_Web/assets/118894673/d94e0f37-5ad3-408c-876e-44fab059de71)
+![Screenshot 2024-03-16 181037](https://github.com/TomerBeren/FooBook_Web/assets/118894673/2bc2804b-5592-46db-9465-d9bc3a129f4b)
+![Screenshot 2024-03-16 181054](https://github.com/TomerBeren/FooBook_Web/assets/118894673/2aabe906-e86d-4da3-b1cd-6daf871ca5ad)
+![Screenshot 2024-03-16 181132](https://github.com/TomerBeren/FooBook_Web/assets/118894673/7b3a13a5-3d91-4e81-b777-30da9183e28d)
